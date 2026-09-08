@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 32" width="192" height="32" role="img" aria-label="PODIUM">
+  <defs>
+    <linearGradient id="podiumDiamond" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f04b93"/>
+      <stop offset="1" stop-color="#d6266f"/>
+    </linearGradient>
+  </defs>
+  <rect x="9" y="9" width="14" height="14" rx="1.5" fill="url(#podiumDiamond)" transform="rotate(45 16 16)"/>
+  <text x="36" y="23" font-family="'Jost', 'Segoe UI', Arial, sans-serif" font-weight="700" font-size="24" letter-spacing="1.7" fill="#f5e9f0">PODIUM</text>
+</svg>
