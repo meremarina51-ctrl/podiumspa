@@ -6,14 +6,13 @@ import Link from "next/link"
 import { useRef } from "react"
 import { STAFF } from "@/lib/staff"
 import { GRADIENTS } from "@/pages/Staff/constants"
+import { RELATED_COUNT } from "./constants"
 
-interface RelatedStaffProps {
+interface IProps {
     currentIndex: number
 }
 
-const RELATED_COUNT = 8
-
-export const RelatedStaff = ({ currentIndex }: RelatedStaffProps) => {
+export const RelatedStaff = ({ currentIndex }: IProps) => {
     const scrollRef = useRef<HTMLDivElement>(null)
 
     const count = Math.min(RELATED_COUNT, STAFF.length - 1)
@@ -31,7 +30,7 @@ export const RelatedStaff = ({ currentIndex }: RelatedStaffProps) => {
             <div className="mb-9 flex flex-wrap items-end justify-between gap-5">
                 <h2
                     className="text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
-                    style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                    style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
                     Другие <em className="text-accent-light">девушки</em>
                 </h2>
@@ -66,7 +65,7 @@ export const RelatedStaff = ({ currentIndex }: RelatedStaffProps) => {
                             </div>
                             <p
                                 className="mt-3.5 text-[20px] leading-none text-foreground transition-colors duration-200 group-hover:text-accent-light"
-                                style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                                style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                             >
                                 {girl.name}{girl.age ? `, ${girl.age}` : ""}
                             </p>
@@ -98,4 +97,4 @@ export const RelatedStaff = ({ currentIndex }: RelatedStaffProps) => {
             </div>
         </section>
     )
-}
+};

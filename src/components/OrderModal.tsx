@@ -8,7 +8,7 @@ import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon"
 import { formatPhone } from "@/lib/formatPhone"
 import { WHATSAPP_HREF } from "@/pages/Home/constants"
 
-interface OrderModalProps {
+interface IProps {
     title: string
     open: boolean
     onClose: () => void
@@ -17,15 +17,15 @@ interface OrderModalProps {
 const inputClass =
     "h-12 w-full rounded-[10px] border border-foreground/15 bg-foreground/3 pl-11 pr-4 text-sm text-foreground placeholder:text-foreground-faint transition-colors focus:border-accent/50 focus:bg-foreground/5 focus:outline-none"
 
-const headingFont = { fontFamily: "var(--font-cormorant), Georgia, serif" }
+const headingFont = { fontFamily: "var(--font-cormorant), Arial, sans-serif" }
 
-export const OrderModal = ({ title, open, onClose }: OrderModalProps) => {
+export const OrderModal = ({ title, open, onClose }: IProps) => {
     const [name, setName] = useState("")
     const [phoneValue, setPhoneValue] = useState("")
-    const [consent, setConsent] = useState(false)
-    const [submitted, setSubmitted] = useState(false)
+    const [isConsent, setConsent] = useState(false)
+    const [isSubmitted, setSubmitted] = useState(false)
 
-    const canSubmit = name.trim() !== "" && phoneValue.trim() !== "" && consent
+    const canSubmit = name.trim() !== "" && phoneValue.trim() !== "" && isConsent
 
     useEffect(() => {
         if (!open) return
@@ -39,17 +39,20 @@ export const OrderModal = ({ title, open, onClose }: OrderModalProps) => {
 
     useEffect(() => {
         if (open) return
+
         const timeout = setTimeout(() => {
             setName("")
             setPhoneValue("")
             setConsent(false)
             setSubmitted(false)
         }, 300)
+
         return () => clearTimeout(timeout)
     }, [open])
 
     const handleSubmit = () => {
         if (!canSubmit) return
+        
         setSubmitted(true)
     }
 
@@ -80,7 +83,7 @@ export const OrderModal = ({ title, open, onClose }: OrderModalProps) => {
                     <X className="size-4.5" />
                 </button>
 
-                {submitted ? (
+                {isSubmitted ? (
                     <div className="flex flex-col items-center py-6 text-center">
                         <div className="relative mb-5 flex size-16 items-center justify-center">
                             <span className="absolute inset-0 animate-ping rounded-full bg-accent/20" />
@@ -152,7 +155,7 @@ export const OrderModal = ({ title, open, onClose }: OrderModalProps) => {
 
                             <Checkbox
                                 id="order-consent"
-                                checked={consent}
+                                checked={isConsent}
                                 onChange={(e) => setConsent(e.target.checked)}
                                 label="Нажимая «Отправить», вы соглашаетесь с политикой конфиденциальности"
                             />
@@ -171,4 +174,4 @@ export const OrderModal = ({ title, open, onClose }: OrderModalProps) => {
             </div>
         </>
     )
-}
+};

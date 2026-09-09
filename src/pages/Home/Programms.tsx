@@ -10,7 +10,7 @@ export const Programms = () => (
         <div className="mb-9 flex flex-wrap items-end justify-between gap-5">
             <h2
                 className="text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
-                style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
             >
                 Популярные <em className="text-accent-light">программы</em>
             </h2>
@@ -37,7 +37,7 @@ export const Programms = () => (
                         </div>
                         <p
                             className="mt-4 text-[22px] leading-none font-medium text-foreground transition-colors duration-200 group-hover:text-accent-light"
-                            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
                             {program.name}
                         </p>

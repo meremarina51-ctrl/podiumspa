@@ -9,12 +9,12 @@ import type { StaffMember } from "@/lib/staff"
 import { WHATSAPP_HREF } from "@/pages/Home/constants"
 import { Gallery } from "./Gallery"
 
-interface ProfileProps {
+interface IProps {
     member: StaffMember
 }
 
-export const Profile = ({ member }: ProfileProps) => {
-    const [orderOpen, setOrderOpen] = useState(false)
+export const Profile = ({ member }: IProps) => {
+    const [isOrderOpen, setOrderOpen] = useState(false)
 
     const stats = [
         { label: "Возраст", value: member.age ? `${member.age} лет` : null, icon: Cake },
@@ -38,7 +38,7 @@ export const Profile = ({ member }: ProfileProps) => {
                         </span>
                         <h1
                             className="text-[40px] leading-none font-medium text-foreground sm:text-[48px]"
-                            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
                             {member.name}
                         </h1>
@@ -84,7 +84,7 @@ export const Profile = ({ member }: ProfileProps) => {
                 </div>
             </div>
 
-            <OrderModal title={member.name} open={orderOpen} onClose={() => setOrderOpen(false)} />
+            <OrderModal title={member.name} open={isOrderOpen} onClose={() => setOrderOpen(false)} />
         </section>
     )
-}
+};

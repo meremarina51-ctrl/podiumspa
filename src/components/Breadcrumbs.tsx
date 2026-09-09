@@ -12,4 +12,4 @@ export const Breadcrumbs = ({ current }: IProps) => (
         <span>/</span>
         <span className="text-foreground-muted">{current}</span>
     </div>
-)
+);

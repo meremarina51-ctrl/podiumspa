@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Geist, Geist_Mono, Jost } from "next/font/google";
+import { Geist, Geist_Mono, Manrope } from "next/font/google";
 import { FloatingButton } from "@/components/FloatingButton";
 import "./globals.css";
 
@@ -13,17 +13,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const jost = Jost({
+// Single site-wide typeface: Manrope, loaded under both the body and
+// display variable slots so every existing `var(--font-jost)` /
+// `var(--font-cormorant)` reference resolves to the same font family.
+const jost = Manrope({
   variable: "--font-jost",
-  subsets: ["latin"],
-  weight: ["500", "700"],
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const cormorant = Cormorant_Garamond({
+const cormorant = Manrope({
   variable: "--font-cormorant",
   subsets: ["latin", "cyrillic"],
-  weight: ["500", "600"],
-  style: ["normal", "italic"],
+  weight: ["500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {

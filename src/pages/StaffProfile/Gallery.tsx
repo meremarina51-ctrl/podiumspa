@@ -4,20 +4,20 @@ import { ArrowLeft, ArrowRight, Maximize2, X } from "lucide-react"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
-interface GalleryProps {
+interface IProps {
     photos: string[]
     name: string
 }
 
-export const Gallery = ({ photos, name }: GalleryProps) => {
+export const Gallery = ({ photos, name }: IProps) => {
     const [index, setIndex] = useState(0)
-    const [lightbox, setLightbox] = useState(false)
+    const [isLightbox, setLightbox] = useState(false)
 
     const next = () => setIndex((i) => (i + 1) % photos.length)
     const prev = () => setIndex((i) => (i - 1 + photos.length) % photos.length)
 
     useEffect(() => {
-        if (!lightbox) return
+        if (!isLightbox) return
 
         const onKeyDown = (e: KeyboardEvent) => {
             if (e.key === "Escape") setLightbox(false)
@@ -32,7 +32,7 @@ export const Gallery = ({ photos, name }: GalleryProps) => {
             document.removeEventListener("keydown", onKeyDown)
             document.body.style.overflow = ""
         }
-    }, [lightbox])
+    }, [isLightbox])
 
     return (
         <div>
@@ -62,13 +62,13 @@ export const Gallery = ({ photos, name }: GalleryProps) => {
                     <Maximize2 className="size-3.5" />
                 </div>
 
-                {photos.length > 1 && (
+                {photos.length && (
                     <span className="absolute top-4 right-4 rounded-full bg-background/50 px-3 py-1 text-[11px] font-semibold tracking-widest text-foreground backdrop-blur-sm">
                         {String(index + 1).padStart(2, "0")} / {String(photos.length).padStart(2, "0")}
                     </span>
                 )}
 
-                {photos.length > 1 && (
+                {photos.length && (
                     <>
                         <button
                             type="button"
@@ -96,7 +96,7 @@ export const Gallery = ({ photos, name }: GalleryProps) => {
                 )}
             </div>
 
-            {photos.length > 1 && (
+            {photos.length && (
                 <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                     {photos.map((photo, i) => (
                         <button
@@ -113,7 +113,7 @@ export const Gallery = ({ photos, name }: GalleryProps) => {
                 </div>
             )}
 
-            {lightbox && (
+            {isLightbox && (
                 <div className="fixed inset-0 z-80 flex items-center justify-center p-4 sm:p-8">
                     <div
                         className="absolute inset-0 bg-background/85 backdrop-blur-md"
@@ -169,4 +169,4 @@ export const Gallery = ({ photos, name }: GalleryProps) => {
             )}
         </div>
     )
-}
+};

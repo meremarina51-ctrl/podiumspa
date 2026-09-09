@@ -5,17 +5,14 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRef } from "react"
 import { BLOG_POSTS } from "@/lib/blog"
+import { formatDate } from "@/lib/formatDate"
+import { RELATED_COUNT } from "./constants"
 
-interface RelatedPostsProps {
+interface IProps {
     currentIndex: number
 }
 
-const RELATED_COUNT = 8
-
-const formatDate = (iso: string) =>
-    new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" })
-
-export const RelatedPosts = ({ currentIndex }: RelatedPostsProps) => {
+export const RelatedPosts = ({ currentIndex }: IProps) => {
     const scrollRef = useRef<HTMLDivElement>(null)
 
     const count = Math.min(RELATED_COUNT, BLOG_POSTS.length - 1)
@@ -33,7 +30,7 @@ export const RelatedPosts = ({ currentIndex }: RelatedPostsProps) => {
             <div className="mb-9 flex flex-wrap items-end justify-between gap-5">
                 <h2
                     className="text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
-                    style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                    style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
                     Другие <em className="text-accent-light">статьи</em>
                 </h2>
@@ -67,7 +64,7 @@ export const RelatedPosts = ({ currentIndex }: RelatedPostsProps) => {
                             </div>
                             <p
                                 className="mt-4 text-[18px] leading-tight font-medium text-foreground transition-colors duration-200 group-hover:text-accent-light"
-                                style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                                style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                             >
                                 {post.title}
                             </p>
@@ -97,4 +94,4 @@ export const RelatedPosts = ({ currentIndex }: RelatedPostsProps) => {
             </div>
         </section>
     )
-}
+};

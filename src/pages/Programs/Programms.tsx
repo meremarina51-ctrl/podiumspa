@@ -17,17 +17,17 @@ export const Programms = () => {
     const [durationTo, setDurationTo] = useState("")
     const [filters, setFilters] = useState(EMPTY_FILTERS)
     const [visible, setVisible] = useState(PAGE_SIZE)
-    const [filtersOpen, setFiltersOpen] = useState(false)
+    const [isFiltersOpen, setFiltersOpen] = useState(false)
 
     useEffect(() => {
-        if (!filtersOpen) return
+        if (!isFiltersOpen) return
 
         document.body.style.overflow = "hidden"
 
         return () => {
             document.body.style.overflow = ""
         }
-    }, [filtersOpen])
+    }, [isFiltersOpen])
 
     const filtered = useMemo(() => {
         const { priceFrom, priceTo, durationFrom, durationTo } = filters
@@ -120,7 +120,7 @@ export const Programms = () => {
         <section className="mx-auto w-full max-w-340 px-6 py-16 md:px-14 md:py-24">
             <h2
                 className="mb-9 text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
-                style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
             >
                 Программы
             </h2>
@@ -179,12 +179,12 @@ export const Programms = () => {
             <div
                 onClick={() => setFiltersOpen(false)}
                 aria-hidden="true"
-                className={`fixed inset-0 z-60 bg-background/70 backdrop-blur-sm transition-opacity duration-300 sm:hidden ${filtersOpen ? "opacity-100" : "pointer-events-none opacity-0"
+                className={`fixed inset-0 z-60 bg-background/70 backdrop-blur-sm transition-opacity duration-300 sm:hidden ${isFiltersOpen ? "opacity-100" : "pointer-events-none opacity-0"
                     }`}
             />
 
             <div
-                className={`fixed inset-x-0 bottom-0 z-70 flex max-h-[85vh] flex-col rounded-t-2xl border-t border-border bg-surface shadow-2xl shadow-black/40 transition-transform duration-300 ease-out sm:hidden ${filtersOpen ? "translate-y-0" : "translate-y-full"
+                className={`fixed inset-x-0 bottom-0 z-70 flex max-h-[85vh] flex-col rounded-t-2xl border-t border-border bg-surface shadow-2xl shadow-black/40 transition-transform duration-300 ease-out sm:hidden ${isFiltersOpen ? "translate-y-0" : "translate-y-full"
                     }`}
             >
                 <div className="flex items-center justify-between border-b border-border px-6 py-5">
@@ -244,7 +244,7 @@ export const Programms = () => {
                             </div>
                             <p
                                 className="mt-4 text-[22px] leading-none font-medium text-foreground transition-colors duration-200 group-hover:text-accent-light"
-                                style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                                style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                             >
                                 {program.name}
                             </p>

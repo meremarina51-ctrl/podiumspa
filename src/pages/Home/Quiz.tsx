@@ -16,7 +16,7 @@ const primaryButtonClass =
 const secondaryButtonClass =
     "group inline-flex items-center cursor-pointer gap-2 rounded-[10px] border border-foreground/15 px-6 py-3.5 text-sm font-bold text-foreground/70 transition-all hover:-translate-y-0.5 hover:border-foreground/30 hover:text-foreground"
 
-const headingFont = { fontFamily: "var(--font-cormorant), Georgia, serif" }
+const headingFont = { fontFamily: "var(--font-cormorant), Arial, sans-serif" }
 
 export const Quiz = () => {
     const [step, setStep] = useState(0)
@@ -43,6 +43,7 @@ export const Quiz = () => {
 
     const handleSubmit = () => {
         if (!canSubmit) return
+        
         setStep(SUCCESS_STEP)
     }
 

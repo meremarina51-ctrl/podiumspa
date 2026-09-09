@@ -7,7 +7,7 @@ export const Advantages = () => (
                 <span className="text-[11.5px] font-semibold tracking-[0.22em] text-accent-light uppercase">Почему выбирают нас</span>
                 <h2
                     className="mt-4 text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
-                    style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                    style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
                     Наши <em className="text-accent-light">преимущества</em>
                 </h2>

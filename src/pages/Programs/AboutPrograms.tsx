@@ -5,7 +5,7 @@ export const AboutPrograms = () => (
     <section className="mx-auto w-full max-w-340 px-6 py-16 md:px-14 md:py-24">
         <h2
             className="mb-10 max-w-165 text-[28px] leading-tight font-medium text-foreground sm:text-[32px] md:mb-14 md:text-[36px]"
-            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
         >
             Программы в салоне эротического массажа <em className="text-accent-light">PODIUM</em>
         </h2>

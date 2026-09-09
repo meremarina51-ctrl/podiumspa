@@ -5,15 +5,13 @@ import Image from "next/image"
 import { useState } from "react"
 import { OrderModal } from "@/components/OrderModal"
 import type { BLOG_POSTS } from "@/lib/blog"
+import { formatDate } from "@/lib/formatDate"
 
-interface ProfileProps {
+interface IProps {
     post: (typeof BLOG_POSTS)[number]
 }
 
-const formatDate = (iso: string) =>
-    new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" })
-
-export const Profile = ({ post }: ProfileProps) => {
+export const Profile = ({ post }: IProps) => {
     const [orderOpen, setOrderOpen] = useState(false)
     const [lightbox, setLightbox] = useState(false)
 
@@ -30,7 +28,7 @@ export const Profile = ({ post }: ProfileProps) => {
                         </span>
                         <h1
                             className="text-[36px] leading-none font-medium text-foreground sm:text-[44px]"
-                            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
                             {post.title}
                         </h1>

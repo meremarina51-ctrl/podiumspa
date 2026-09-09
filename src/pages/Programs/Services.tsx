@@ -17,7 +17,7 @@ export const Services = () => {
         <section className="mx-auto w-full max-w-340 px-6 py-16 md:px-14 md:py-24">
             <h2
                 className="mb-9 text-[28px] leading-none font-medium text-foreground sm:text-[32px] md:text-[36px]"
-                style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
             >
                 Вам может быть <em className="text-accent-light">интересно</em>
             </h2>
@@ -37,7 +37,7 @@ export const Services = () => {
                     <div>
                         <p
                             className="text-[19px] font-medium text-foreground"
-                            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
                             {service.name}
                         </p>

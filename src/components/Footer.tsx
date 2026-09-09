@@ -104,7 +104,7 @@ export const Footer = () => (
 
                 <div className="flex flex-wrap items-center gap-5 text-xs text-foreground-faint">
                     <span>© {new Date().getFullYear()} PODIUM</span>
-                    <Link href="/" className="transition-colors duration-200 hover:text-foreground">
+                    <Link href="/privacy" className="transition-colors duration-200 hover:text-foreground">
                         Политика конфиденциальности
                     </Link>
                 </div>

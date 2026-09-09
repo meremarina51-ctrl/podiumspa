@@ -5,7 +5,7 @@ export const Categories = () => (
     <section className="mx-auto w-full max-w-340 px-6 py-16 md:px-14 md:py-24">
         <h2
             className="mb-9 text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
-            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
         >
             Категории
         </h2>

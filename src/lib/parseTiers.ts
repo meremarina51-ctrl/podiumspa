@@ -6,4 +6,4 @@ export const parseTiers = (price: string) =>
             if (!match) return null
             return { price: Number(match[1].replace(/\s/g, "")), duration: Number(match[2]) }
         })
-        .filter((tier): tier is { price: number; duration: number } => tier !== null)
+        .filter((tier): tier is { price: number; duration: number } => tier !== null);

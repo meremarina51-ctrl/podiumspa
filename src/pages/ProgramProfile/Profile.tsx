@@ -6,13 +6,13 @@ import { useState } from "react"
 import { OrderModal } from "@/components/OrderModal"
 import type { ALL_PROGRAMMS } from "@/lib/programms"
 
-interface ProfileProps {
+interface IProps {
     program: (typeof ALL_PROGRAMMS)[number]
 }
 
-export const Profile = ({ program }: ProfileProps) => {
-    const [orderOpen, setOrderOpen] = useState(false)
-    const [lightbox, setLightbox] = useState(false)
+export const Profile = ({ program }: IProps) => {
+    const [isOrderOpen, setOrderOpen] = useState(false)
+    const [isLightbox, setLightbox] = useState(false)
 
     const [price, duration] = program.price.split("·").map((part) => part.trim())
 
@@ -48,7 +48,7 @@ export const Profile = ({ program }: ProfileProps) => {
                         </span>
                         <h1
                             className="text-[40px] leading-none font-medium text-foreground sm:text-[48px]"
-                            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
                             {program.name}
                         </h1>
@@ -93,7 +93,7 @@ export const Profile = ({ program }: ProfileProps) => {
                 </div>
             </div>
 
-            {lightbox && (
+            {isLightbox && (
                 <div className="fixed inset-0 z-80 flex items-center justify-center p-4 sm:p-8">
                     <div className="absolute inset-0 bg-background/85 backdrop-blur-md" onClick={() => setLightbox(false)} />
                     <button
@@ -110,7 +110,7 @@ export const Profile = ({ program }: ProfileProps) => {
                 </div>
             )}
 
-            <OrderModal title={program.name} open={orderOpen} onClose={() => setOrderOpen(false)} />
+            <OrderModal title={program.name} open={isOrderOpen} onClose={() => setOrderOpen(false)} />
         </section>
     )
-}
+};

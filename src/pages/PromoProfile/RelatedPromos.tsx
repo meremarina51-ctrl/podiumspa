@@ -6,14 +6,13 @@ import Link from "next/link"
 import { useRef } from "react"
 import { PROMOS } from "@/lib/promo"
 import { truncate } from "@/lib/truncate"
+import { RELATED_COUNT } from "./constants"
 
-interface RelatedPromosProps {
+interface IProps {
     currentIndex: number
 }
 
-const RELATED_COUNT = 8
-
-export const RelatedPromos = ({ currentIndex }: RelatedPromosProps) => {
+export const RelatedPromos = ({ currentIndex }: IProps) => {
     const scrollRef = useRef<HTMLDivElement>(null)
 
     const count = Math.min(RELATED_COUNT, PROMOS.length - 1)
@@ -31,7 +30,7 @@ export const RelatedPromos = ({ currentIndex }: RelatedPromosProps) => {
             <div className="mb-9 flex flex-wrap items-end justify-between gap-5">
                 <h2
                     className="text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
-                    style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                    style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
                     Другие <em className="text-accent-light">акции</em>
                 </h2>
@@ -74,7 +73,7 @@ export const RelatedPromos = ({ currentIndex }: RelatedPromosProps) => {
                             </div>
                             <p
                                 className="mt-4 text-[18px] leading-none font-medium text-foreground transition-colors duration-200 group-hover:text-accent-light"
-                                style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                                style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                             >
                                 {promo.name}
                             </p>
@@ -104,4 +103,4 @@ export const RelatedPromos = ({ currentIndex }: RelatedPromosProps) => {
             </div>
         </section>
     )
-}
+};

@@ -7,7 +7,7 @@ export const Catalog = () => (
     <section className="mx-auto w-full max-w-340 px-6 pb-16 md:px-14 md:pb-24">
         <h2
             className="mb-9 text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
-            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
         >
             Все <em className="text-accent-light">акции</em>
         </h2>
@@ -39,7 +39,7 @@ export const Catalog = () => (
                     </div>
                     <p
                         className="mt-4 text-[20px] leading-none font-medium text-foreground transition-colors duration-200 group-hover:text-accent-light"
-                        style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                        style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                     >
                         {promo.name}
                     </p>

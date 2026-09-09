@@ -6,13 +6,13 @@ import { useState } from "react"
 import { OrderModal } from "@/components/OrderModal"
 import type { PROMOS } from "@/lib/promo"
 
-interface ProfileProps {
+interface IProps {
     promo: (typeof PROMOS)[number]
 }
 
-export const Profile = ({ promo }: ProfileProps) => {
-    const [orderOpen, setOrderOpen] = useState(false)
-    const [lightbox, setLightbox] = useState(false)
+export const Profile = ({ promo }: IProps) => {
+    const [isOrderOpen, setOrderOpen] = useState(false)
+    const [isLightbox, setLightbox] = useState(false)
 
     return (
         <section className="relative overflow-hidden">
@@ -27,7 +27,7 @@ export const Profile = ({ promo }: ProfileProps) => {
                         </span>
                         <h1
                             className="text-[40px] leading-none font-medium text-foreground sm:text-[48px]"
-                            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
                             {promo.name}
                         </h1>
@@ -71,7 +71,7 @@ export const Profile = ({ promo }: ProfileProps) => {
                 </div>
             </div>
 
-            {lightbox && (
+            {isLightbox && (
                 <div className="fixed inset-0 z-80 flex items-center justify-center p-4 sm:p-8">
                     <div className="absolute inset-0 bg-background/85 backdrop-blur-md" onClick={() => setLightbox(false)} />
                     <button
@@ -88,7 +88,7 @@ export const Profile = ({ promo }: ProfileProps) => {
                 </div>
             )}
 
-            <OrderModal title={promo.name} open={orderOpen} onClose={() => setOrderOpen(false)} />
+            <OrderModal title={promo.name} open={isOrderOpen} onClose={() => setOrderOpen(false)} />
         </section>
     )
-}
+};

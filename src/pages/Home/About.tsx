@@ -50,7 +50,7 @@ export const About = () => {
                     <span className="text-[11.5px] font-semibold tracking-[0.22em] text-accent-light uppercase">О салоне</span>
                     <h2
                         className="mt-4 mb-6 text-[28px] leading-[1.15] font-medium text-foreground sm:text-[34px] lg:text-[38px]"
-                        style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                        style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                     >
                         Салон эротического массажа Podium —{" "}
                         <em className="text-accent-light">лучшее место для отдыха</em>
@@ -66,7 +66,7 @@ export const About = () => {
                             <div key={i} className="flex items-baseline gap-4.5">
                                 <span
                                     className="shrink-0 text-[15px] text-accent-light"
-                                    style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                                    style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                                 >
                                     0{i + 1}
                                 </span>

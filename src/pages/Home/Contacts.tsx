@@ -3,13 +3,14 @@ import Image from "next/image"
 import Link from "next/link"
 import { address, hours, phone } from "@/components/constants"
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon"
+import { YandexMap } from "@/components/YandexMap"
 import { EMAIL, WHATSAPP_HREF } from "./constants"
 
 export const Contacts = () => (
     <section className="mx-auto w-full max-w-340 px-6 py-16 md:px-14 md:py-24">
         <h2
             className="mb-12 text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:mb-14 md:text-[44px]"
-            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
         >
             Контакты
         </h2>
@@ -78,15 +79,8 @@ export const Contacts = () => (
         </div>
 
         <div className="relative mt-10 h-80 w-full overflow-hidden rounded-sm sm:h-95">
-            <div
-                className="absolute inset-0"
-                style={{
-                    background:
-                        "linear-gradient(#20121a,#20121a) padding-box, repeating-linear-gradient(0deg, rgba(245,233,240,0.05) 0 1px, transparent 1px 44px), repeating-linear-gradient(90deg, rgba(245,233,240,0.05) 0 1px, transparent 1px 44px), linear-gradient(200deg,#241019,#0d0608)",
-                }}
-            />
-            <div className="absolute inset-0 bg-[radial-gradient(45%_55%_at_50%_45%,rgba(214,38,111,0.12),transparent_70%)]" />
-            <div className="absolute top-1/2 left-1/2 size-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent shadow-[0_0_0_10px_var(--accent-wash)]" />
+            <YandexMap />
+            <div className="pointer-events-none absolute inset-0 bg-[rgba(10,5,9,0.35)] mix-blend-multiply" />
         </div>
     </section>
 );

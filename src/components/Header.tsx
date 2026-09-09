@@ -12,17 +12,17 @@ const navLinkClass = (active: boolean) =>
 
 export const Header = () => {
     const pathname = usePathname()
-    const [open, setOpen] = useState(false)
+    const [isOpen, setOpen] = useState(false)
 
     useEffect(() => {
-        if (!open) return
+        if (!isOpen) return
 
         document.body.style.overflow = "hidden"
         
         return () => {
             document.body.style.overflow = ""
         }
-    }, [open])
+    }, [isOpen])
 
     return (
         <>
@@ -91,12 +91,12 @@ export const Header = () => {
             <div
                 onClick={() => setOpen(false)}
                 aria-hidden="true"
-                className={`fixed inset-0 z-60 bg-background/70 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${open ? "opacity-100" : "pointer-events-none opacity-0"
+                className={`fixed inset-0 z-60 bg-background/70 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${isOpen ? "opacity-100" : "pointer-events-none opacity-0"
                     }`}
             />
 
             <aside
-                className={`fixed top-0 right-0 z-70 flex h-dvh w-full flex-col border-l border-border bg-surface p-6 shadow-2xl shadow-black/40 transition-transform duration-300 ease-out sm:max-w-80 lg:hidden ${open ? "translate-x-0" : "translate-x-full"
+                className={`fixed top-0 right-0 z-70 flex h-dvh w-full flex-col border-l border-border bg-surface p-6 shadow-2xl shadow-black/40 transition-transform duration-300 ease-out sm:max-w-80 lg:hidden ${isOpen ? "translate-x-0" : "translate-x-full"
                     }`}
             >
                 <div className="mb-8 flex items-center justify-between">

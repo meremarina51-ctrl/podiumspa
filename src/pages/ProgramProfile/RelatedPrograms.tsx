@@ -5,14 +5,13 @@ import Image from "next/image"
 import Link from "next/link"
 import { useRef } from "react"
 import { ALL_PROGRAMMS } from "@/lib/programms"
+import { RELATED_COUNT } from "./constants"
 
-interface RelatedProgramsProps {
+interface IProps {
     currentIndex: number
 }
 
-const RELATED_COUNT = 8
-
-export const RelatedPrograms = ({ currentIndex }: RelatedProgramsProps) => {
+export const RelatedPrograms = ({ currentIndex }: IProps) => {
     const scrollRef = useRef<HTMLDivElement>(null)
 
     const count = Math.min(RELATED_COUNT, ALL_PROGRAMMS.length - 1)
@@ -30,7 +29,7 @@ export const RelatedPrograms = ({ currentIndex }: RelatedProgramsProps) => {
             <div className="mb-9 flex flex-wrap items-end justify-between gap-5">
                 <h2
                     className="text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
-                    style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                    style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
                     Другие <em className="text-accent-light">программы</em>
                 </h2>
@@ -60,7 +59,7 @@ export const RelatedPrograms = ({ currentIndex }: RelatedProgramsProps) => {
                             </div>
                             <p
                                 className="mt-4 text-[18px] leading-none font-medium text-foreground transition-colors duration-200 group-hover:text-accent-light"
-                                style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                                style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                             >
                                 {program.name}
                             </p>

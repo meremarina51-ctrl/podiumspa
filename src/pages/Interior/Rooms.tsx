@@ -13,7 +13,7 @@ export const Rooms = () => {
             <div className="mb-12 text-center">
                 <h1
                     className="text-[38px] leading-none font-medium text-foreground sm:text-[44px] md:text-[52px]"
-                    style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                    style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
                     Интерьер
                 </h1>
@@ -35,7 +35,7 @@ export const Rooms = () => {
                         <div className="flex flex-1 flex-col gap-3">
                             <p
                                 className="text-[22px] leading-none font-medium text-foreground"
-                                style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                                style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                             >
                                 {name}
                             </p>

@@ -20,7 +20,7 @@ export const Promo = () => {
             <div className="mb-9 flex flex-wrap items-end justify-between gap-5">
                 <h2
                     className="text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
-                    style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                    style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
                     Наши <em className="text-accent-light">акции</em>
                 </h2>
@@ -42,7 +42,7 @@ export const Promo = () => {
                         </span>
                         <h3
                             className="mb-3 text-2xl leading-tight font-medium text-foreground xl:mb-3.5 xl:text-[32px] xl:leading-none"
-                            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
                             {main.title}
                         </h3>
@@ -65,7 +65,7 @@ export const Promo = () => {
                         </span>
                         <h3
                             className="text-xl leading-tight font-medium text-foreground/70"
-                            style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                            style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
                             {peek.title}
                         </h3>

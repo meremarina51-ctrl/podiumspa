@@ -14,7 +14,7 @@ export const Hero = () => (
 
                     <h1
                         className="mt-4 max-w-120 text-[30px] leading-[1.15] font-medium wrap-break-word text-foreground sm:text-[42px] lg:text-[48px]"
-                        style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                        style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                     >
                         Podium — салон эротического массажа класса{" "}
                         <em className="text-accent-light">VIP</em>

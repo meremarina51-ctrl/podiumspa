@@ -16,7 +16,7 @@ export const Banner = () => (
             <div className="relative max-w-130 px-6 py-16">
                 <h2
                     className="mb-3.5 text-[28px] leading-tight font-medium text-foreground sm:text-[34px]"
-                    style={{ fontFamily: "var(--font-cormorant), Georgia, serif" }}
+                    style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
                     Не определились с <em className="text-accent-light">выбором?</em>
                 </h2>
