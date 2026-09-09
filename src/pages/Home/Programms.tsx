@@ -1,18 +1,9 @@
+import { parseTiers } from "@/lib/parseTiers";
 import { ALL_PROGRAMMS } from "@/lib/programms"
 import Image from "next/image"
 import Link from "next/link"
 
-const parseTiers = (price: string) =>
-    price
-        .split("\n")
-        .map((part) => {
-            const match = part.match(/([\d\s]+)\s*₽\s*·\s*(\d+)\s*мин/)
-            if (!match) return null
-            return { price: Number(match[1].replace(/\s/g, "")), duration: Number(match[2]) }
-        })
-        .filter((tier): tier is { price: number; duration: number } => tier !== null)
-
-const PROGRAMS = ALL_PROGRAMMS.slice(0, 4).map((program) => ({ ...program, tiers: parseTiers(program.price) }))
+const PROGRAMS = ALL_PROGRAMMS.slice(0, 4).map((program, index) => ({ ...program, tiers: parseTiers(program.price), index }))
 
 export const Programms = () => (
     <section className="mx-auto w-full max-w-340 px-6 py-16 md:px-14 md:py-24">
@@ -34,7 +25,7 @@ export const Programms = () => (
         <div className="grid grid-cols-2 gap-x-5 gap-y-8 max-sm:grid-cols-1 lg:grid-cols-4">
             {PROGRAMS.map((program) => (
                 <div key={program.name} className="group">
-                    <Link key={program.name} href="/programs" className="group block">
+                    <Link key={program.name} href={`/programs/${program.index}`} className="group block">
                         <div className="relative aspect-4/5 overflow-hidden rounded-sm">
                             <Image
                                 src={program.photo}

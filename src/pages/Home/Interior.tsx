@@ -117,7 +117,7 @@ export const Interior = () => {
                         type="button"
                         onClick={() => setLightbox(null)}
                         aria-label="Закрыть"
-                        className="absolute top-4 right-4 flex size-10 items-center justify-center rounded-full border border-border bg-background/70 text-foreground-muted backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-foreground sm:top-6 sm:right-6"
+                        className="absolute top-4 right-4 z-10 flex size-10 items-center justify-center rounded-full border border-border bg-background/70 text-foreground-muted backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-foreground sm:top-6 sm:right-6"
                     >
                         <X className="size-5" />
                     </button>

@@ -3,59 +3,7 @@
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
-
-const SERVICES = [
-    {
-        name: 'Фетиш',
-        options: ['1 000 ₽ · 30 мин', '1 500 ₽ · 60 мин'],
-        photo: '/services/photo_2023-10-11_14-39-13.jpg.webp',
-    },
-    {
-        name: 'Совместный душ',
-        options: ['500 ₽ · 30 мин', '1 000 ₽ · 60 мин'],
-        photo: '/services/photo_2023-10-11_14-39-24.jpg.webp',
-    },
-    {
-        name: 'Массаж простаты',
-        options: ['2 000 ₽ · 30 мин'],
-        photo: '/services/photo_2023-10-11_14-39-33.jpg.webp',
-    },
-    {
-        name: 'Ветка сакуры',
-        options: ['500 ₽ · 30 мин', '1 000 ₽ · 60 мин'],
-        photo: '/services/photo_2023-10-11_14-39-44.jpg.webp',
-    },
-    {
-        name: 'Страпон',
-        options: ['5 000 ₽ · 60 мин'],
-        photo: '/services/photo_2023-10-11_14-39-55.jpg.webp',
-    },
-    {
-        name: 'Массаж горячими апельсинами',
-        options: ['1 000 ₽ · 60 мин'],
-        photo: '/services/photo_2023-10-11_14-40-04.jpg.webp',
-    },
-    {
-        name: 'Камасутра',
-        options: ['1 000 ₽ · 30 мин', '2 000 ₽ · 60 мин'],
-        photo: '/services/photo_2023-10-11_14-40-14.jpg.webp',
-    },
-    {
-        name: 'Тайский боди массаж',
-        options: ['500 ₽ · 30 мин', '1 000 ₽ · 60 мин'],
-        photo: '/services/photo_2023-10-11_14-40-25.jpg.webp',
-    },
-    {
-        name: 'Массаж стоп горячими полотенцами',
-        options: ['500 ₽ · 30 мин'],
-        photo: '/services/photo_2023-10-11_14-40-35.jpg.webp',
-    },
-    {
-        name: 'Имитация оральных ласк',
-        options: ['1 000 ₽ · 30 мин', '1 500 ₽ · 60 мин'],
-        photo: '/services/photo_2023-10-11_14-40-45.jpg.webp',
-    },
-]
+import { SERVICES } from "./constants"
 
 export const Services = () => {
     const [index, setIndex] = useState(0)

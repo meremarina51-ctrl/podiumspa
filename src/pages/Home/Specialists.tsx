@@ -1,15 +1,9 @@
 import Image from "next/image"
 import Link from "next/link"
 import { STAFF } from "@/lib/staff"
+import { GRADIENTS } from "./constants";
 
 const GIRLS = STAFF.slice(0, 8)
-
-const GRADIENTS = [
-    "linear-gradient(200deg,#3a1226,#100609)",
-    "linear-gradient(200deg,#241019,#0d0608)",
-    "linear-gradient(200deg,#2e1420,#0f070c)",
-    "linear-gradient(200deg,#2c1018,#0d0608)",
-];
 
 export const Specialists = () => (
     <section className="mx-auto w-full max-w-340 px-6 py-16 md:px-14 md:py-24">

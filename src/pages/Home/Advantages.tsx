@@ -25,4 +25,4 @@ export const Advantages = () => (
             </div>
         </div>
     </section>
-)
+);

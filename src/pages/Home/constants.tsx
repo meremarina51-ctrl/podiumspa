@@ -1,6 +1,7 @@
 import { Crown, Gift, Heart, Infinity, Martini } from "lucide-react";
 
 export const WHATSAPP_HREF = 'https://wa.me/79374338034';
+export const TELEGRAM_HREF = 'https://t.me/happy_end_guest_1';
 export const EMAIL = 'm7441@yandex.ru';
 
 export const VIDEOS = [
@@ -16,14 +17,14 @@ export const POINTS = [
 ]
 
 export const PHOTOS = [
-    "/home/interior/img_9281.jpg",
-    "/home/interior/img_9282.jpg",
-    "/home/interior/img_9284.jpg",
-    "/home/interior/img_9291.jpg",
-    "/home/interior/img_9294.jpg",
-    "/home/interior/img_9296.jpg",
-    "/home/interior/img_9297.jpg",
-    "/home/interior/img_9300.jpg",
+    "/home/interior/img_9281.avif",
+    "/home/interior/img_9282.avif",
+    "/home/interior/img_9284.avif",
+    "/home/interior/img_9291.avif",
+    "/home/interior/img_9294.avif",
+    "/home/interior/img_9296.avif",
+    "/home/interior/img_9297.avif",
+    "/home/interior/img_9300.avif",
 ]
 
 export const CATEGORY_ICONS = [Gift, Martini, Crown, Heart, Infinity]
@@ -32,27 +33,27 @@ export const PROMOS = [
     {
         title: "Счастливый билет!",
         description: "Беспроигрышная лотерея!",
-        image: "/home/promo/pod_vbrmn_banner_long.png.webp",
+        image: "/home/promo/pod_vbrmn_banner_long.png.avif",
     },
     {
         title: "Коктейльная вечеринка!",
         description: "Каждый четверг коктейльная вечеринка в Podium spa",
-        image: "/home/promo/vecherinka-koktejlnaya-1.png.webp",
+        image: "/home/promo/vecherinka-koktejlnaya-1.png.avif",
     },
     {
         title: "Мы рады не только мужчинам..",
         description: "Приятный бонус для милых дам!",
-        image: "/home/promo/solyarij-1.png.webp",
+        image: "/home/promo/solyarij-1.png.avif",
     },
     {
         title: "Днем с огнем!",
         description: "Приятный бонус для любителей отдохнуть по будням",
-        image: "/home/promo/vip-programmy.png.webp",
+        image: "/home/promo/vip-programmy.png.avif",
     },
     {
         title: "Двойной экстаз",
         description: "Специально для наших мужчин массаж  в 4 руки в подарок!",
-        image: "/home/promo/lesbi.png.webp",
+        image: "/home/promo/lesbi.png.avif",
     },
 ]
 
@@ -94,17 +95,23 @@ export const CONTACT_STEP = TOTAL_STEPS + 1
 export const SUCCESS_STEP = TOTAL_STEPS + 2
 
 export const STEP_IMAGES = [
-    "/home/quiz/choise-form-start.png.webp",
-    "/home/quiz/choise-form-1.jpg.webp",
-    "/home/quiz/choise-form-2.jpg.webp",
-    "/home/quiz/choise-form-3.jpg.webp",
-    "/home/quiz/choise-form-4.jpg.webp",
-    "/home/quiz/choise-form-5.jpg.webp",
-    "/home/quiz/choise-form-6.jpg.webp",
-    "/home/quiz/choise-form-end.jpg.webp",
-    "/home/quiz/choise-form-end.jpg.webp",
+    "/home/quiz/choise-form-start.png.avif",
+    "/home/quiz/choise-form-1.jpg.avif",
+    "/home/quiz/choise-form-2.jpg.avif",
+    "/home/quiz/choise-form-3.jpg.avif",
+    "/home/quiz/choise-form-4.jpg.avif",
+    "/home/quiz/choise-form-5.jpg.avif",
+    "/home/quiz/choise-form-6.jpg.avif",
+    "/home/quiz/choise-form-end.jpg.avif",
+    "/home/quiz/choise-form-end.jpg.avif",
 ]
 
+export const GRADIENTS = [
+    "linear-gradient(200deg,#3a1226,#100609)",
+    "linear-gradient(200deg,#241019,#0d0608)",
+    "linear-gradient(200deg,#2e1420,#0f070c)",
+    "linear-gradient(200deg,#2c1018,#0d0608)",
+];
 
 export const ADVANTAGES = [
     {

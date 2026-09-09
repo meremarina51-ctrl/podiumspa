@@ -214,7 +214,7 @@ export const Quiz = () => {
     }
 
     return (
-        <section className="px-5 pb-16 sm:px-6 sm:pb-20 lg:px-10 lg:pb-24">
+        <section id="quiz" className="px-5 pb-16 sm:px-6 sm:pb-20 lg:px-10 lg:pb-24">
             <div className="mx-auto max-w-200">
                 <div className="relative overflow-hidden rounded-[20px] border border-accent/25 p-6 shadow-2xl shadow-black/40 sm:p-8 lg:p-12">
                     {STEP_IMAGES.map((src, i) => (

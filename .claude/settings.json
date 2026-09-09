@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm ping *)",
+      "Bash(node _convert-avif.cjs public)",
+      "Bash(powershell -NoProfile -Command \"Get-Process node -ErrorAction SilentlyContinue | Select-Object Id,Path,StartTime\")",
+      "Bash(powershell -NoProfile -Command \"Get-CimInstance Win32_Process -Filter \\\\\"Name='node.exe'\\\\\" | Select-Object ProcessId,CommandLine | Format-List\")",
+      "Bash(powershell -NoProfile -Command \"Stop-Process -Id 39212,16568,29484,41324,44804 -Force -ErrorAction SilentlyContinue; Start-Sleep -Milliseconds 500; Get-Process node -ErrorAction SilentlyContinue | Select-Object Id\")",
+      "PowerShell(Get-Process | Where-Object {$_.ProcessName -match 'OneDrive|Dropbox|SearchIndexer|MsMpEng|rust-analyzer|Everything|GoogleDrive|iCloud'} | Select-Object Id,ProcessName)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"Name='node.exe'\")",
+      "PowerShell(Wait-Process -Id 29144 -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"Name='node.exe'\" | Where-Object { $_.CommandLine -match 'convert-avif' } | Select-Object ProcessId,CommandLine)",
+      "PowerShell(Stop-Process -Id 29144 -Force -ErrorAction SilentlyContinue)",
+      "Bash(node _delete-old.cjs)",
+      "Bash(node _update-refs.cjs)",
+      "Bash(node _verify-refs.cjs)"
+    ]
+  }
+}

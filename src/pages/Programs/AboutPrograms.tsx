@@ -1,13 +1,5 @@
 import { Check } from "lucide-react"
-
-const CHECKLIST = [
-    "У нас собрано множество услуг для отдыха",
-    "Вы сможете отдохнуть у нас и 30, и 60, и все 180 минут",
-    "Мы расслабляем не только физически, но и эмоционально",
-    "Наши администраторы помогут вам при выборе программы",
-    "Все процедуры выполняются профессиональными мастерами",
-    "Вы можете заказать программу на выезд",
-]
+import { CHECKLIST } from "./constants"
 
 export const AboutPrograms = () => (
     <section className="mx-auto w-full max-w-340 px-6 py-16 md:px-14 md:py-24">
@@ -60,4 +52,4 @@ export const AboutPrograms = () => (
             </div>
         </div>
     </section>
-)
+);

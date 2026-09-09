@@ -7,7 +7,7 @@ import { Banner } from "@/pages/Programs/Banner";
 import { Programms } from "@/pages/Programs/Programms";
 import { Services } from "@/pages/Programs/Services";
 
-export default async function Programs() {
+export default async function ProgramsPage() {
     return (
         <>
             <Header />

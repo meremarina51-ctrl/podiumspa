@@ -5,7 +5,7 @@ export const Banner = () => (
     <section className="mx-auto w-full max-w-340 px-6 pb-16 md:px-14 md:pb-24">
         <div className="relative flex min-h-70 items-center justify-center overflow-hidden rounded-sm text-center">
             <Image
-                src="/banner/akcziya1.png.webp"
+                src="/banner/akcziya1.png.avif"
                 alt="Подарочные сертификаты Podium Spa"
                 fill
                 sizes="(min-width: 1024px) 1280px, 100vw"

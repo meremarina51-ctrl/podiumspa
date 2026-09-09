@@ -41,6 +41,10 @@ body {
   font-family: var(--font-jost), Arial, Helvetica, sans-serif;
 }
 
+body > main {
+  flex: 1;
+}
+
 @keyframes step-in {
   from {
     opacity: 0;

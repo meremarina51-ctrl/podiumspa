@@ -6,7 +6,7 @@ export const TelegramBanner = () => (
     <section className="mx-auto w-full max-w-340 px-6 pb-16 md:px-14 md:pb-24">
         <div className="relative min-h-70 overflow-hidden rounded-sm">
             <Image
-                src="/banner/akcziya2.jpg.webp"
+                src="/banner/akcziya2.jpg.avif"
                 alt=""
                 fill
                 sizes="(min-width: 1024px) 1280px, 100vw"
@@ -37,4 +37,4 @@ export const TelegramBanner = () => (
             </div>
         </div>
     </section>
-)
+);

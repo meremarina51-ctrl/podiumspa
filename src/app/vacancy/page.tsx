@@ -1,3 +1,3 @@
-export default async function Vacancy() {
+export default async function VacancyPage() {
     return <></>
 };
