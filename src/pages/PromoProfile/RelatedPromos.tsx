@@ -1,18 +1,25 @@
 "use client"
 
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { useRef } from "react"
+import { pick } from "@/lib/i18n-content"
 import { PROMOS } from "@/lib/promo"
 import { truncate } from "@/lib/truncate"
 import { RELATED_COUNT } from "./constants"
+import { ROUTES } from "@/lib/routes"
 
 interface IProps {
     currentIndex: number
 }
 
 export const RelatedPromos = ({ currentIndex }: IProps) => {
+    const t = useTranslations("relatedPromos")
+    const tPromo = useTranslations("promoPage")
+    const tCommon = useTranslations("common")
+    const locale = useLocale()
     const scrollRef = useRef<HTMLDivElement>(null)
 
     const count = Math.min(RELATED_COUNT, PROMOS.length - 1)
@@ -32,31 +39,31 @@ export const RelatedPromos = ({ currentIndex }: IProps) => {
                     className="text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
                     style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
-                    Другие <em className="text-accent-light">акции</em>
+                    {t("titleStart")} <em className="text-accent-light">{t("titleAccent")}</em>
                 </h2>
                 <Link
-                    href="/promo"
+                    href={ROUTES.PROMO}
                     className="border-b border-accent-wash-strong pb-1 text-[12.5px] font-semibold tracking-[0.08em] text-accent-light uppercase transition-colors duration-200 hover:text-foreground"
                 >
-                    Смотреть все
+                    {tCommon("viewAll")}
                 </Link>
             </div>
 
             <div className="relative">
                 <div
                     ref={scrollRef}
-                    className="flex gap-5 overflow-x-auto pb-2 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                    className="flex gap-5 overflow-x-auto pb-2 scroll-smooth scrollbar-none [&::-webkit-scrollbar]:hidden"
                 >
                     {related.map((promo) => (
                         <Link
-                            key={promo.name}
-                            href={`/promo/${promo.index}`}
+                            key={promo.index}
+                            href={`${ROUTES.PROMO}/${promo.index}`}
                             className={`group block w-52 shrink-0 sm:w-60 ${promo.expired ? "opacity-60 hover:opacity-80" : ""}`}
                         >
                             <div className="relative aspect-4/5 overflow-hidden rounded-sm">
                                 <Image
                                     src={promo.photo}
-                                    alt={promo.name}
+                                    alt={pick(promo.name, locale)}
                                     fill
                                     sizes="(min-width: 640px) 240px, 208px"
                                     className={`object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${promo.expired ? "grayscale" : ""}`}
@@ -68,17 +75,17 @@ export const RelatedPromos = ({ currentIndex }: IProps) => {
                                         : "border-accent/50 bg-background/40 text-accent-light"
                                         }`}
                                 >
-                                    {promo.expired ? "Завершена" : "Акция"}
+                                    {promo.expired ? t("expiredShort") : tPromo("active")}
                                 </span>
                             </div>
                             <p
                                 className="mt-4 text-[18px] leading-none font-medium text-foreground transition-colors duration-200 group-hover:text-accent-light"
                                 style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                             >
-                                {promo.name}
+                                {pick(promo.name, locale)}
                             </p>
                             <p className="mt-1.5 text-[13px] leading-relaxed text-foreground-muted">
-                                {truncate(promo.bio, 80)}
+                                {truncate(pick(promo.bio, locale), 80)}
                             </p>
                         </Link>
                     ))}
@@ -87,16 +94,16 @@ export const RelatedPromos = ({ currentIndex }: IProps) => {
                 <button
                     type="button"
                     onClick={() => scrollBy(-1)}
-                    aria-label="Назад"
-                    className="absolute top-[32%] -left-4 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/20 bg-background text-foreground shadow-lg transition-colors duration-200 hover:border-foreground/40 lg:flex"
+                    aria-label={tCommon("carouselBack")}
+                    className="absolute cursor-pointer top-[32%] -left-4 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/20 bg-background text-foreground shadow-lg transition-colors duration-200 hover:border-foreground/40 lg:flex"
                 >
                     <ArrowLeft className="size-4" />
                 </button>
                 <button
                     type="button"
                     onClick={() => scrollBy(1)}
-                    aria-label="Вперёд"
-                    className="absolute top-[32%] -right-4 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-accent/50 bg-background text-foreground shadow-lg transition-colors duration-200 hover:border-accent lg:flex"
+                    aria-label={tCommon("carouselNext")}
+                    className="absolute cursor-pointer top-[32%] -right-4 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-accent/50 bg-background text-foreground shadow-lg transition-colors duration-200 hover:border-accent lg:flex"
                 >
                     <ArrowRight className="size-4" />
                 </button>

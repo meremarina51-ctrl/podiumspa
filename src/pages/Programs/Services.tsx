@@ -1,11 +1,15 @@
 "use client"
 
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
 import { useState } from "react"
+import { pick } from "@/lib/i18n-content"
 import { SERVICES } from "./constants"
 
 export const Services = () => {
+    const t = useTranslations("programsServices")
+    const locale = useLocale()
     const [index, setIndex] = useState(0)
 
     const next = () => setIndex((i) => (i + 1) % SERVICES.length)
@@ -19,7 +23,7 @@ export const Services = () => {
                 className="mb-9 text-[28px] leading-none font-medium text-foreground sm:text-[32px] md:text-[36px]"
                 style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
             >
-                Вам может быть <em className="text-accent-light">интересно</em>
+                {t("titleStart")} <em className="text-accent-light">{t("titleAccent")}</em>
             </h2>
 
             <div className="flex flex-wrap items-center justify-between gap-8">
@@ -28,7 +32,7 @@ export const Services = () => {
                         <Image
                             key={service.photo}
                             src={service.photo}
-                            alt={service.name}
+                            alt={pick(service.name, locale)}
                             fill
                             sizes="160px"
                             className="object-cover"
@@ -39,12 +43,12 @@ export const Services = () => {
                             className="text-[19px] font-medium text-foreground"
                             style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
-                            {service.name}
+                            {pick(service.name, locale)}
                         </p>
                         <div className="mt-2 flex flex-col gap-1">
-                            {service.options.map((option) => (
-                                <p key={option} className="text-[13.5px] text-foreground-faint">
-                                    {option}
+                            {service.options.map((option, i) => (
+                                <p key={i} className="text-[13.5px] text-foreground-faint">
+                                    {pick(option, locale)}
                                 </p>
                             ))}
                         </div>
@@ -55,8 +59,8 @@ export const Services = () => {
                     <button
                         type="button"
                         onClick={prev}
-                        aria-label="Предыдущая услуга"
-                        className="flex size-10 items-center justify-center rounded-full border border-foreground/20 text-foreground transition-colors duration-200 hover:border-foreground/40"
+                        aria-label={t("prevAria")}
+                        className="flex cursor-pointer size-10 items-center justify-center rounded-full border border-foreground/20 text-foreground transition-colors duration-200 hover:border-foreground/40"
                     >
                         <ArrowLeft className="size-4" />
                     </button>
@@ -66,8 +70,8 @@ export const Services = () => {
                     <button
                         type="button"
                         onClick={next}
-                        aria-label="Следующая услуга"
-                        className="flex size-10 items-center justify-center rounded-full border border-accent/50 text-foreground transition-colors duration-200 hover:border-accent"
+                        aria-label={t("nextAria")}
+                        className="flex cursor-pointer size-10 items-center justify-center rounded-full border border-accent/50 text-foreground transition-colors duration-200 hover:border-accent"
                     >
                         <ArrowRight className="size-4" />
                     </button>
@@ -75,4 +79,4 @@ export const Services = () => {
             </div>
         </section>
     )
-}
+};

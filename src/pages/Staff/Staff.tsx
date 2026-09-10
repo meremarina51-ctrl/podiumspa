@@ -1,12 +1,15 @@
 "use client"
 
 import { RotateCcw, SlidersHorizontal, X } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { useEffect, useMemo, useState } from "react"
 import { Checkbox } from "@/components/Checkbox"
+import { pick } from "@/lib/i18n-content"
 import { STAFF } from "@/lib/staff"
 import { EMPTY_FILTERS, GRADIENTS, PAGE_SIZE } from "./constants"
+import { ROUTES } from "@/lib/routes"
 
 const bustValue = (bust: string) => {
     const match = bust.match(/[\d,.]+/)
@@ -16,20 +19,23 @@ const bustValue = (bust: string) => {
 const isSiliconeBust = (bust: string) => bust.toLowerCase().includes("sil")
 
 export const Staff = () => {
+    const t = useTranslations("staffPage")
+    const tCommon = useTranslations("common")
+    const locale = useLocale()
     const [form, setForm] = useState(EMPTY_FILTERS)
     const [filters, setFilters] = useState(EMPTY_FILTERS)
     const [visible, setVisible] = useState(PAGE_SIZE)
-    const [filtersOpen, setFiltersOpen] = useState(false)
+    const [isFiltersOpen, setFiltersOpen] = useState(false)
 
     useEffect(() => {
-        if (!filtersOpen) return
+        if (!isFiltersOpen) return
 
         document.body.style.overflow = "hidden"
 
         return () => {
             document.body.style.overflow = ""
         }
-    }, [filtersOpen])
+    }, [isFiltersOpen])
 
     const set = <K extends keyof typeof form>(key: K, value: (typeof form)[K]) =>
         setForm((prev) => ({ ...prev, [key]: value }))
@@ -91,38 +97,38 @@ export const Staff = () => {
     const filterFields = (
         <>
             <div className="basis-[calc(50%-0.625rem)] sm:basis-auto">
-                <span className={labelClass}>Возраст, лет</span>
+                <span className={labelClass}>{t("age")}</span>
                 <div className={rangeGroupClass}>
-                    <input type="number" value={form.ageFrom} onChange={(e) => set("ageFrom", e.target.value)} placeholder="От" className={rangeInputClass} />
+                    <input type="number" value={form.ageFrom} onChange={(e) => set("ageFrom", e.target.value)} placeholder={tCommon("from")} className={rangeInputClass} />
                     <span className="text-foreground-faint">—</span>
-                    <input type="number" value={form.ageTo} onChange={(e) => set("ageTo", e.target.value)} placeholder="До" className={rangeInputClass} />
+                    <input type="number" value={form.ageTo} onChange={(e) => set("ageTo", e.target.value)} placeholder={tCommon("to")} className={rangeInputClass} />
                 </div>
             </div>
 
             <div className="basis-[calc(50%-0.625rem)] sm:basis-auto">
-                <span className={labelClass}>Рост, см</span>
+                <span className={labelClass}>{t("height")}</span>
                 <div className={rangeGroupClass}>
-                    <input type="number" value={form.heightFrom} onChange={(e) => set("heightFrom", e.target.value)} placeholder="От" className={rangeInputClass} />
+                    <input type="number" value={form.heightFrom} onChange={(e) => set("heightFrom", e.target.value)} placeholder={tCommon("from")} className={rangeInputClass} />
                     <span className="text-foreground-faint">—</span>
-                    <input type="number" value={form.heightTo} onChange={(e) => set("heightTo", e.target.value)} placeholder="До" className={rangeInputClass} />
+                    <input type="number" value={form.heightTo} onChange={(e) => set("heightTo", e.target.value)} placeholder={tCommon("to")} className={rangeInputClass} />
                 </div>
             </div>
 
             <div className="basis-[calc(50%-0.625rem)] sm:basis-auto">
-                <span className={labelClass}>Вес, кг</span>
+                <span className={labelClass}>{t("weight")}</span>
                 <div className={rangeGroupClass}>
-                    <input type="number" value={form.weightFrom} onChange={(e) => set("weightFrom", e.target.value)} placeholder="От" className={rangeInputClass} />
+                    <input type="number" value={form.weightFrom} onChange={(e) => set("weightFrom", e.target.value)} placeholder={tCommon("from")} className={rangeInputClass} />
                     <span className="text-foreground-faint">—</span>
-                    <input type="number" value={form.weightTo} onChange={(e) => set("weightTo", e.target.value)} placeholder="До" className={rangeInputClass} />
+                    <input type="number" value={form.weightTo} onChange={(e) => set("weightTo", e.target.value)} placeholder={tCommon("to")} className={rangeInputClass} />
                 </div>
             </div>
 
             <div className="basis-[calc(50%-0.625rem)] sm:basis-auto">
-                <span className={labelClass}>Грудь</span>
+                <span className={labelClass}>{t("bust")}</span>
                 <div className={rangeGroupClass}>
-                    <input type="number" step="0.5" value={form.bustFrom} onChange={(e) => set("bustFrom", e.target.value)} placeholder="От" className={rangeInputClass} />
+                    <input type="number" step="0.5" value={form.bustFrom} onChange={(e) => set("bustFrom", e.target.value)} placeholder={tCommon("from")} className={rangeInputClass} />
                     <span className="text-foreground-faint">—</span>
-                    <input type="number" step="0.5" value={form.bustTo} onChange={(e) => set("bustTo", e.target.value)} placeholder="До" className={rangeInputClass} />
+                    <input type="number" step="0.5" value={form.bustTo} onChange={(e) => set("bustTo", e.target.value)} placeholder={tCommon("to")} className={rangeInputClass} />
                 </div>
             </div>
 
@@ -131,13 +137,13 @@ export const Staff = () => {
                     id="filter-silicone"
                     checked={form.silicone}
                     onChange={(e) => set("silicone", e.target.checked)}
-                    label="Силикон"
+                    label={t("silicone")}
                 />
                 <Checkbox
                     id="filter-video"
                     checked={form.hasVideo}
                     onChange={(e) => set("hasVideo", e.target.checked)}
-                    label="Есть видео"
+                    label={t("hasVideo")}
                 />
             </div>
         </>
@@ -150,10 +156,10 @@ export const Staff = () => {
                     className="text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
                     style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
-                    Девушки <em className="text-accent-light">салона</em>
+                    {t("titleStart")} <em className="text-accent-light">{t("titleAccent")}</em>
                 </h2>
                 <span className="text-[12.5px] font-semibold tracking-[0.08em] text-foreground-faint uppercase">
-                    Всего: {STAFF.length}
+                    {t("total", { n: STAFF.length })}
                 </span>
             </div>
 
@@ -164,7 +170,7 @@ export const Staff = () => {
                     className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-border text-[13px] font-semibold text-foreground transition-colors duration-200 hover:border-accent-light hover:text-accent-light"
                 >
                     <SlidersHorizontal className="size-4" />
-                    Фильтры
+                    {tCommon("filters")}
                     {!!activeCount && (
                         <span className="flex size-5 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-white">
                             {activeCount}
@@ -175,7 +181,7 @@ export const Staff = () => {
                     <button
                         type="button"
                         onClick={resetFilters}
-                        aria-label="Сбросить фильтры"
+                        aria-label={tCommon("resetFilters")}
                         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border text-foreground-muted transition-colors duration-200 hover:border-accent-light hover:text-accent-light"
                     >
                         <RotateCcw className="size-4" />
@@ -193,17 +199,17 @@ export const Staff = () => {
                         disabled={!isDirty}
                         className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-foreground/10 disabled:text-foreground-faint disabled:hover:bg-foreground/10"
                     >
-                        Применить
+                        {tCommon("apply")}
                     </button>
                     <button
                         type="button"
                         onClick={resetFilters}
                         disabled={!canReset}
-                        aria-label="Сбросить фильтры"
+                        aria-label={tCommon("resetFilters")}
                         className="flex h-11 items-center gap-2 rounded-full border border-border px-4 text-[13px] font-semibold text-foreground-muted transition-colors duration-200 hover:border-accent-light hover:text-accent-light disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-foreground-muted"
                     >
                         <RotateCcw className="size-3.5" />
-                        Сбросить
+                        {tCommon("reset")}
                     </button>
                 </div>
             </div>
@@ -211,20 +217,20 @@ export const Staff = () => {
             <div
                 onClick={() => setFiltersOpen(false)}
                 aria-hidden="true"
-                className={`fixed inset-0 z-60 bg-background/70 backdrop-blur-sm transition-opacity duration-300 sm:hidden ${filtersOpen ? "opacity-100" : "pointer-events-none opacity-0"
+                className={`fixed inset-0 z-60 bg-background/70 backdrop-blur-sm transition-opacity duration-300 sm:hidden ${isFiltersOpen ? "opacity-100" : "pointer-events-none opacity-0"
                     }`}
             />
 
             <div
-                className={`fixed inset-x-0 bottom-0 z-70 flex max-h-[85vh] flex-col rounded-t-2xl border-t border-border bg-surface shadow-2xl shadow-black/40 transition-transform duration-300 ease-out sm:hidden ${filtersOpen ? "translate-y-0" : "translate-y-full"
+                className={`fixed inset-x-0 bottom-0 z-70 flex max-h-[85vh] flex-col rounded-t-2xl border-t border-border bg-surface shadow-2xl shadow-black/40 transition-transform duration-300 ease-out sm:hidden ${isFiltersOpen ? "translate-y-0" : "translate-y-full"
                     }`}
             >
                 <div className="flex items-center justify-between border-b border-border px-6 py-5">
-                    <span className="text-xs font-bold tracking-wide text-foreground-faint uppercase">Фильтры</span>
+                    <span className="text-xs font-bold tracking-wide text-foreground-faint uppercase">{tCommon("filters")}</span>
                     <button
                         type="button"
                         onClick={() => setFiltersOpen(false)}
-                        aria-label="Закрыть фильтры"
+                        aria-label={tCommon("closeFilters")}
                         className="flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 text-foreground transition-colors duration-200 hover:border-foreground/30"
                     >
                         <X className="size-5" />
@@ -242,29 +248,29 @@ export const Staff = () => {
                         disabled={!isDirty}
                         className="flex-1 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-foreground/10 disabled:text-foreground-faint disabled:hover:bg-foreground/10"
                     >
-                        Применить
+                        {tCommon("apply")}
                     </button>
                     <button
                         type="button"
                         onClick={resetFilters}
                         disabled={!canReset}
-                        aria-label="Сбросить фильтры"
+                        aria-label={tCommon("resetFilters")}
                         className="flex h-12 items-center gap-2 rounded-full border border-border px-4 text-[13px] font-semibold text-foreground-muted transition-colors duration-200 hover:border-accent-light hover:text-accent-light disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-foreground-muted"
                     >
                         <RotateCcw className="size-3.5" />
-                        Сбросить
+                        {tCommon("reset")}
                     </button>
                 </div>
             </div>
 
             {!filtered.length ? (
                 <p className="py-10 text-center text-[14.5px] text-foreground-muted">
-                    По заданным параметрам никого не найдено.
+                    {t("empty")}
                 </p>
             ) : (
                 <div className="grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-3 lg:grid-cols-4">
                     {filtered.slice(0, visible).map((girl, i) => (
-                        <Link key={girl.name} href={`/staff/${STAFF.indexOf(girl)}`} className="group block">
+                        <Link key={STAFF.indexOf(girl)} href={`${ROUTES.STAFF}/${STAFF.indexOf(girl)}`} className="group block">
                             <div
                                 className="relative aspect-3/4 overflow-hidden rounded-sm transition-transform duration-300 ease-out group-hover:-translate-y-1"
                                 style={{ background: GRADIENTS[i % GRADIENTS.length] }}
@@ -272,7 +278,7 @@ export const Staff = () => {
                                 {girl.photos[0] && (
                                     <Image
                                         src={girl.photos[0]}
-                                        alt={girl.name}
+                                        alt={pick(girl.name, locale)}
                                         fill
                                         sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                                         className="object-cover"
@@ -283,12 +289,12 @@ export const Staff = () => {
                                 className="mt-3.5 text-[20px] leading-none text-foreground transition-colors duration-200 group-hover:text-accent-light"
                                 style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                             >
-                                {girl.name}{girl.age ? `, ${girl.age}` : ""}
+                                {pick(girl.name, locale)}{girl.age ? `, ${girl.age}` : ""}
                             </p>
                             <p className="mt-1 text-[12.5px] text-foreground-faint">
-                                {girl.height ? `Рост: ${girl.height} · ` : ""}
-                                {girl.weight ? `Вес: ${girl.weight} · ` : ""}
-                                Грудь: {girl.bust}
+                                {girl.height ? `${t("cardHeight")}: ${girl.height} · ` : ""}
+                                {girl.weight ? `${t("cardWeight")}: ${girl.weight} · ` : ""}
+                                {t("cardBust")}: {girl.bust}
                             </p>
                         </Link>
                     ))}
@@ -302,7 +308,7 @@ export const Staff = () => {
                         onClick={() => setVisible((v) => v + PAGE_SIZE)}
                         className="rounded-full cursor-pointer border border-border px-8 py-4 text-[13.5px] font-semibold tracking-[0.03em] text-foreground transition-colors duration-200 hover:border-accent-light hover:text-accent-light"
                     >
-                        Показать ещё
+                        {tCommon("showMore")}
                     </button>
                 </div>
             )}

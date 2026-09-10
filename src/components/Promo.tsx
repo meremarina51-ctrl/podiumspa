@@ -2,15 +2,21 @@
 
 import { CATEGORY_ICONS, PROMOS } from "@/pages/Home/constants"
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { useState } from "react"
+import { pick } from "@/lib/i18n-content"
+import { ROUTES } from "@/lib/routes"
 
 interface IProps {
     variant?: "section" | "page"
 }
 
 export const Promo = ({ variant = "section" }: IProps) => {
+    const t = useTranslations("promoPage")
+    const tCommon = useTranslations("common")
+    const locale = useLocale()
     const [index, setIndex] = useState(0)
 
     const next = () => setIndex((i) => (i + 1) % PROMOS.length)
@@ -27,9 +33,9 @@ export const Promo = ({ variant = "section" }: IProps) => {
                         className="text-[38px] leading-none font-medium text-foreground sm:text-[44px] md:text-[52px]"
                         style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                     >
-                        Акции
+                        {t("title")}
                     </h1>
-                    <p className="mt-3 text-[14.5px] text-foreground-muted">Уникальные предложения для вас</p>
+                    <p className="mt-3 text-[14.5px] text-foreground-muted">{t("subtitle")}</p>
                 </div>
             ) : (
                 <div className="mb-9 flex flex-wrap items-end justify-between gap-5">
@@ -37,53 +43,53 @@ export const Promo = ({ variant = "section" }: IProps) => {
                         className="text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
                         style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                     >
-                        Наши <em className="text-accent-light">акции</em>
+                        {t("titleStart")} <em className="text-accent-light">{t("titleAccent")}</em>
                     </h2>
                     <Link
-                        href="/promo"
+                        href={ROUTES.PROMO}
                         className="border-b border-accent-wash-strong pb-1 text-[12.5px] font-semibold tracking-[0.08em] text-accent-light uppercase transition-colors duration-200 hover:text-foreground"
                     >
-                        Все акции
+                        {tCommon("viewAll")}
                     </Link>
                 </div>
             )}
 
             <div className="flex gap-5 overflow-hidden">
                 <div className="relative aspect-4/5 flex-[0_0_100%] overflow-hidden rounded-sm sm:aspect-video xl:aspect-21/8 xl:flex-[0_0_74%]">
-                    <Image src={main.image} alt={main.title} fill sizes="(min-width: 1280px) 74vw, 100vw" className="object-cover" priority />
+                    <Image src={main.image} alt={pick(main.title, locale)} fill sizes="(min-width: 1280px) 74vw, 100vw" className="object-cover" priority />
                     <div className="absolute inset-0 bg-linear-to-t from-background/95 via-background/55 to-transparent xl:bg-linear-to-r xl:from-background/95 xl:via-background/60 xl:to-transparent" />
                     <div className="relative flex h-full max-w-130 flex-col justify-end px-6 pb-8 sm:justify-center sm:px-14 sm:pb-0">
                         <span className="mb-4 w-fit rounded-full border border-accent/50 px-3.5 py-1.5 text-[11px] font-semibold tracking-widest text-accent-light uppercase xl:mb-5">
-                            Акция
+                            {t("active")}
                         </span>
                         <h3
                             className="mb-3 text-2xl leading-tight font-medium text-foreground xl:mb-3.5 xl:text-[32px] xl:leading-none"
                             style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
-                            {main.title}
+                            {pick(main.title, locale)}
                         </h3>
-                        <p className="mb-5 max-w-100 text-sm leading-relaxed text-foreground-muted xl:mb-6">{main.description}</p>
+                        <p className="mb-5 max-w-100 text-sm leading-relaxed text-foreground-muted xl:mb-6">{pick(main.description, locale)}</p>
                         <Link
-                            href="/promo"
+                            href={ROUTES.PROMO}
                             className="w-fit rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-dark xl:px-7 xl:py-3.5"
                         >
-                            Подробнее
+                            {t("more")}
                         </Link>
                     </div>
                 </div>
 
                 <div className="relative hidden aspect-21/8 flex-[0_0_22%] overflow-hidden rounded-sm xl:block">
-                    <Image src={peek.image} alt={peek.title} fill sizes="22vw" className="object-cover" />
+                    <Image src={peek.image} alt={pick(peek.title, locale)} fill sizes="22vw" className="object-cover" />
                     <div className="absolute inset-0 bg-linear-to-t from-background/95 via-background/45 to-background/10" />
                     <div className="relative flex h-full flex-col justify-center px-6">
                         <span className="mb-4 w-fit rounded-full border border-foreground/20 px-3 py-1 text-[10px] font-semibold tracking-[0.08em] text-foreground-faint uppercase">
-                            Акция
+                            {t("active")}
                         </span>
                         <h3
                             className="text-xl leading-tight font-medium text-foreground/70"
                             style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
-                            {peek.title}
+                            {pick(peek.title, locale)}
                         </h3>
                     </div>
                 </div>
@@ -96,8 +102,8 @@ export const Promo = ({ variant = "section" }: IProps) => {
                             key={i}
                             type="button"
                             onClick={() => setIndex(i)}
-                            aria-label={`Слайд ${i + 1}`}
-                            className={`h-1.5 rounded-full transition-all duration-300 ${i === index ? "w-6 bg-accent" : "w-1.5 bg-foreground/20"}`}
+                            aria-label={t("slideNumber", { n: i + 1 })}
+                            className={`h-1.5 cursor-pointer rounded-full transition-all duration-300 ${i === index ? "w-6 bg-accent" : "w-1.5 bg-foreground/20"}`}
                         />
                     ))}
                 </div>
@@ -109,16 +115,16 @@ export const Promo = ({ variant = "section" }: IProps) => {
                     <button
                         type="button"
                         onClick={prev}
-                        aria-label="Предыдущий слайд"
-                        className="flex size-10 items-center justify-center rounded-full border border-foreground/20 text-foreground transition-colors duration-200 hover:border-foreground/40"
+                        aria-label={t("prevSlide")}
+                        className="flex cursor-pointer size-10 items-center justify-center rounded-full border border-foreground/20 text-foreground transition-colors duration-200 hover:border-foreground/40"
                     >
                         <ArrowLeft className="size-4" />
                     </button>
                     <button
                         type="button"
                         onClick={next}
-                        aria-label="Следующий слайд"
-                        className="flex size-10 items-center justify-center rounded-full border border-accent/50 text-foreground transition-colors duration-200 hover:border-accent"
+                        aria-label={t("nextSlide")}
+                        className="flex cursor-pointer size-10 items-center justify-center rounded-full border border-accent/50 text-foreground transition-colors duration-200 hover:border-accent"
                     >
                         <ArrowRight className="size-4" />
                     </button>
@@ -131,7 +137,7 @@ export const Promo = ({ variant = "section" }: IProps) => {
                         key={i}
                         type="button"
                         onClick={() => setIndex(i)}
-                        aria-label={PROMOS[i]?.title ?? `Слайд ${i + 1}`}
+                        aria-label={PROMOS[i] ? pick(PROMOS[i].title, locale) : t("slideNumber", { n: i + 1 })}
                         className={`flex size-11 cursor-pointer shrink-0 items-center justify-center rounded-full transition-colors duration-200 sm:size-12 ${i === index
                             ? "bg-accent text-white"
                             : "bg-accent-wash text-accent-light hover:bg-accent-wash-strong"

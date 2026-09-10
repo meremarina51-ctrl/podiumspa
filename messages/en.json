@@ -1,0 +1,309 @@
+{
+    "metadata": {
+        "title": "Podium — a private erotic massage salon in Moscow",
+        "description": "Podium is a VIP-class erotic massage salon in the center of Moscow. Open around the clock."
+    },
+    "common": {
+        "bookCta": "Book Now",
+        "orderCta": "Order",
+        "carouselBack": "Back",
+        "carouselNext": "Next",
+        "viewAll": "View All",
+        "viewAllPeople": "View All",
+        "showMore": "Show More",
+        "filters": "Filters",
+        "apply": "Apply",
+        "reset": "Reset",
+        "resetFilters": "Reset filters",
+        "closeFilters": "Close filters",
+        "from": "From",
+        "to": "To",
+        "close": "Close",
+        "openFullscreen": "Open photo fullscreen",
+        "prevPhoto": "Previous photo",
+        "nextPhoto": "Next photo",
+        "photoNumber": "Photo {n}",
+        "whatsapp": "WhatsApp",
+        "telegram": "Telegram",
+        "email": "Email",
+        "writeWhatsapp": "Message on WhatsApp",
+        "writeTelegram": "Message on Telegram",
+        "disclaimer": "The salon does not provide services of an intimate nature!",
+        "bookingNoteShort": "We work by appointment — please call ahead!"
+    },
+    "header": {
+        "openMenu": "Open menu",
+        "closeMenu": "Close menu",
+        "menu": "Menu"
+    },
+    "footer": {
+        "menu": "Menu",
+        "vacancy": "Careers",
+        "ourPrograms": "Our Programs",
+        "contacts": "Contacts",
+        "telegramChannel": "Our Telegram Channel",
+        "telegramBlurb": "The latest news and exclusive content",
+        "subscribe": "Subscribe",
+        "acceptedPayments": "We Accept",
+        "privacyPolicy": "Privacy Policy"
+    },
+    "floatingButton": {
+        "whatsapp": "Message on WhatsApp",
+        "telegram": "Message on Telegram",
+        "openMenu": "Contact us",
+        "closeMenu": "Close menu"
+    },
+    "languageSwitcher": {
+        "selectLanguage": "Select language",
+        "ru": "Русский",
+        "en": "English"
+    },
+    "orderModal": {
+        "submittedTitle": "Request sent",
+        "submittedText": "Our administrator will contact you shortly.",
+        "bookingNote": "We work by appointment — please call ahead!",
+        "nameLabel": "Your name",
+        "namePlaceholder": "Enter your name",
+        "phoneLabel": "Phone number",
+        "consentLabel": "By clicking \"Send\" you agree to the privacy policy",
+        "submit": "Send"
+    },
+    "homeHero": {
+        "eyebrow": "Private erotic massage salon",
+        "titleStart": "Podium — salon of erotic massage of",
+        "titleAccent": "VIP-class",
+        "giftTitle": "Gift certificates for men for an erotic massage",
+        "giftSubtitle": "Give him an incredible surprise!",
+        "giftCta": "Get one"
+    },
+    "homeAbout": {
+        "eyebrow": "About the salon",
+        "titleStart": "Podium erotic massage salon —",
+        "titleAccent": "the best place to relax in Moscow",
+        "intro": "You don't need to wait for the right moment to have a good time — do it right now inside Podium! Men love the company of our stunning masseuses, and it's easy to see why.",
+        "outro": "Don't deny yourself the pleasure you've long dreamed of! Our masseuses will keep you delightful company.",
+        "videoAria": "Video {n}"
+    },
+    "homeAdvantages": {
+        "eyebrow": "Why choose us",
+        "titleStart": "Our",
+        "titleAccent": "advantages"
+    },
+    "homeContacts": {
+        "title": "Contacts",
+        "address": "Address",
+        "hours": "Business hours",
+        "acceptedPayments": "We Accept",
+        "bookingNote": "We work by appointment — please call ahead!",
+        "allContacts": "All contacts"
+    },
+    "homeInterior": {
+        "titleStart": "Salon",
+        "titleAccent": "interior",
+        "photoAlt": "Salon interior, photo {n}"
+    },
+    "homeProgramms": {
+        "titleStart": "Popular",
+        "titleAccent": "programs",
+        "viewAll": "All programs",
+        "showMore": "See more"
+    },
+    "homeQuiz": {
+        "introTitle": "Can't decide?",
+        "introTitleStart": "Can't",
+        "introTitleAccent": "decide?",
+        "introText": "Send a request to help pick a masseuse and get +30 minutes of massage as a gift!",
+        "start": "Find a match",
+        "questionOf": "Question {step} of {total}",
+        "back": "Back",
+        "nextStep": "Next",
+        "contactTitle": "Fill in your contact details",
+        "contactText": "Our administrator will contact you with the best matches!",
+        "namePlaceholder": "Your name",
+        "phonePlaceholder": "+7 (___) ___-__-__",
+        "consentLabel": "I agree to the processing of personal data and the privacy policy",
+        "submit": "Send",
+        "successTitle": "Request sent",
+        "successText": "Our administrator will contact you shortly with the best matches."
+    },
+    "homeSpecialists": {
+        "titleStart": "Salon",
+        "titleAccent": "girls",
+        "viewAll": "View All",
+        "stats": "Height: {height} · Weight: {weight} · Bust: {bust}",
+        "showMore": "See more"
+    },
+    "homeTelegramBanner": {
+        "title": "Be the first to know about our new models and promotions",
+        "text": "Subscribe to our Telegram channel and relax in comfort!",
+        "cta": "Subscribe"
+    },
+    "staffPage": {
+        "titleStart": "Salon",
+        "titleAccent": "models",
+        "total": "Total: {n}",
+        "age": "Age, years",
+        "height": "Height, cm",
+        "weight": "Weight, kg",
+        "bust": "Bust",
+        "silicone": "Silicone",
+        "hasVideo": "Has video",
+        "empty": "No one matches the selected parameters.",
+        "cardHeight": "Height",
+        "cardWeight": "Weight",
+        "cardBust": "Bust"
+    },
+    "staffAbout": {
+        "titleStart": "Masseuses of the",
+        "titleAccent": "PODIUM",
+        "titleEnd": "erotic massage salon",
+        "paragraph1": "Our masseuses are our pride — and our guests confirm it! Just imagine spending time in the company of one or several beauties… and then she delights you with a professional massage. Not bad, right?",
+        "paragraph2": "Podium erotic massage salon is always ready to help you pick a masseuse! Tell the administrator about your preferences and she'll suggest the best matches for you!",
+        "paragraph3": "If you think a wide choice of masseuses doesn't matter, let us change your mind! Imagine booking a BDSM relaxation session with a Mistress (yes, we have those too), only to have it led by a petite girl with a soft, thin voice. A bit of a mismatch, isn't it?",
+        "paragraph4": "That's exactly why all our masseuses are completely different! Slender and curvy, tall and petite, firm and gentle. And here's another fun fact — plenty of our girls have silicone busts, and plenty have natural ones. It makes it easier for men to choose a companion by that criterion too!",
+        "paragraph5": "For the most insatiable guests of our erotic massage salon, we can offer exciting tandems — many of our girls work great in pairs! It's entirely up to your desire!"
+    },
+    "staffProfile": {
+        "eyebrow": "Model profile",
+        "age": "Age",
+        "height": "Height",
+        "weight": "Weight",
+        "bust": "Bust",
+        "ageValue": "{n} y.o.",
+        "heightValue": "{n} cm",
+        "weightValue": "{n} kg",
+        "photoAlt": "{name}, photo {n}"
+    },
+    "relatedStaff": {
+        "titleStart": "Other",
+        "titleAccent": "models"
+    },
+    "recommendedPrograms": {
+        "titleStart": "Recommended",
+        "titleAccent": "programs",
+        "viewAll": "All programs"
+    },
+    "programsPage": {
+        "title": "Programs",
+        "price": "Price, ₽",
+        "duration": "Duration, min",
+        "empty": "No programs match the selected parameters."
+    },
+    "programsCategories": {
+        "title": "Categories"
+    },
+    "programsServices": {
+        "titleStart": "You might also",
+        "titleAccent": "like",
+        "prevAria": "Previous service",
+        "nextAria": "Next service"
+    },
+    "programsBanner": {
+        "titleStart": "Gift certificates at",
+        "titleAccent": "Podium Spa",
+        "text": "Get a certificate for any amount at our salon online or with home delivery",
+        "cta": "Learn more"
+    },
+    "programsAbout": {
+        "titleStart": "Programs at the",
+        "titleAccent": "PODIUM",
+        "titleEnd": "erotic massage salon",
+        "paragraph1": "Podium erotic salon is a place where you can bring all your hidden desires to life. Let your imagination run free, and our girls will delight you with their relaxation skills.",
+        "paragraph2": "Our goal is to organize leisure time after which you'll feel maximum relaxation and unforgettable emotions.",
+        "paragraph3": "Podium erotic massage salon always takes guests' wishes into account. If you didn't find the right service in our catalog, our administrators can arrange a session tailored to your individual preferences.",
+        "paragraph4": "With us, you can share your most intimate desires. We respect our guests' privacy and never share information about their visits with third parties.",
+        "paragraph5": "One more interesting bonus at Podium — it's not only for men. We've also developed programs for women, as well as for couples."
+    },
+    "programProfile": {
+        "eyebrow": "Program",
+        "price": "Price",
+        "duration": "Duration"
+    },
+    "relatedPrograms": {
+        "titleStart": "Other",
+        "titleAccent": "programs"
+    },
+    "recommendedStaff": {
+        "titleStart": "Recommended",
+        "titleAccent": "models",
+        "viewAll": "View All"
+    },
+    "promoPage": {
+        "title": "Promotions",
+        "subtitle": "Unique offers for you",
+        "titleStart": "Our",
+        "titleAccent": "promotions",
+        "allTitleStart": "All",
+        "allTitleAccent": "promotions",
+        "active": "Promotion",
+        "expired": "Promotion ended",
+        "more": "Learn more",
+        "prevSlide": "Previous slide",
+        "nextSlide": "Next slide",
+        "slideNumber": "Slide {n}"
+    },
+    "promoAbout": {
+        "titleStart": "Promotions at the",
+        "titleAccent": "PODIUM",
+        "titleEnd": "erotic massage salon",
+        "paragraph1": "What's a good salon without great deals? Podium erotic massage salon runs plenty of promotions that let you save money and get interesting gifts. With this approach, your visit becomes even more enjoyable!",
+        "paragraph2": "If you want premium-level leisure at an accessible price, Podium is a great way to make that dream come true! Come by and enjoy a professional massage!",
+        "paragraph3": "Many men believe quality leisure isn't available to everyone. Our erotic massage salon wants to break that stereotype and prove that anyone can enjoy great leisure — you just need to know where to go. And you can see that for yourself by visiting our salon!"
+    },
+    "promoProfile": {
+        "publishedOn": "Published: {date}"
+    },
+    "relatedPromos": {
+        "titleStart": "Other",
+        "titleAccent": "promotions",
+        "expiredShort": "Ended"
+    },
+    "blogPage": {
+        "readMore": "Read more",
+        "empty": "There are no articles in this category yet.",
+        "categories": "Categories",
+        "allCategories": "All"
+    },
+    "blogPopular": {
+        "titleStart": "Popular",
+        "titleAccent": "articles"
+    },
+    "blogAbout": {
+        "titleStart": "Articles about erotic massage at",
+        "titleAccent": "PODIUM",
+        "titleEnd": "salon",
+        "paragraph1": "If you want to lift the veil of mystery and learn a bit more about the world of eroticism, our articles are a great place to start! Here we cover everything from classic relaxation techniques to the boldest, most explicit programs.",
+        "paragraph2": "The first step toward a dream is deciding to take a bold step. For some, that's a parachute jump; for others, it's a visit to an erotic massage salon. In our articles, we look at the most common fears men have about this kind of leisure and how to overcome them.",
+        "paragraph3": "We don't shy away from the benefits of erotic leisure either. Of course, it can't be called therapy, but it can still help with certain issues. And the only way to find out whether a session at Podium can help you deal with your inner demons is one thing — visit us!"
+    },
+    "relatedPosts": {
+        "titleStart": "Other",
+        "titleAccent": "articles"
+    },
+    "contactsPage": {
+        "title": "Contacts",
+        "subtitle": "Get in touch however is convenient for you — we're always available",
+        "address": "Address",
+        "hours": "Business hours",
+        "acceptedPayments": "We Accept",
+        "bookingNote": "We work by appointment — please call ahead to book a convenient time!"
+    },
+    "interiorPage": {
+        "title": "Interior",
+        "subtitle": "VIP-class apartments in the very center of Moscow",
+        "titleStart": "Salon",
+        "titleAccent": "photos",
+        "total": "Total: {n}",
+        "photoAlt": "Salon interior, photo {n}",
+        "openPhoto": "Open photo {n}"
+    },
+    "privacyPage": {
+        "metaTitle": "Privacy Policy — Podium",
+        "titleStart": "Privacy",
+        "titleAccent": "Policy",
+        "backHome": "Back home"
+    },
+    "vacancyPage": {
+        "title": "Careers"
+    }
+}

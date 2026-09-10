@@ -1,15 +1,17 @@
 "use client"
 
 import { ArrowLeft, ArrowRight, Maximize2, X } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-
 interface IProps {
     photos: string[]
     name: string
 }
 
 export const Gallery = ({ photos, name }: IProps) => {
+    const t = useTranslations("common")
+    const tProfile = useTranslations("staffProfile")
     const [index, setIndex] = useState(0)
     const [isLightbox, setLightbox] = useState(false)
 
@@ -43,13 +45,13 @@ export const Gallery = ({ photos, name }: IProps) => {
                 onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") setLightbox(true)
                 }}
-                aria-label="Открыть фото на весь экран"
+                aria-label={t("openFullscreen")}
                 className="relative aspect-3/4 w-full cursor-zoom-in overflow-hidden rounded-sm sm:aspect-4/5"
             >
                 <Image
                     key={photos[index]}
                     src={photos[index]}
-                    alt={`${name}, фото ${index + 1}`}
+                    alt={tProfile("photoAlt", { name, n: index + 1 })}
                     fill
                     sizes="(min-width: 1024px) 640px, 100vw"
                     className="object-cover"
@@ -76,8 +78,8 @@ export const Gallery = ({ photos, name }: IProps) => {
                                 e.stopPropagation()
                                 prev()
                             }}
-                            aria-label="Предыдущее фото"
-                            className="absolute top-1/2 left-4 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-foreground/50"
+                            aria-label={t("prevPhoto")}
+                            className="absolute cursor-pointer top-1/2 left-4 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-foreground/50"
                         >
                             <ArrowLeft className="size-4" />
                         </button>
@@ -87,8 +89,8 @@ export const Gallery = ({ photos, name }: IProps) => {
                                 e.stopPropagation()
                                 next()
                             }}
-                            aria-label="Следующее фото"
-                            className="absolute top-1/2 right-4 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-accent/60 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-accent"
+                            aria-label={t("nextPhoto")}
+                            className="absolute cursor-pointer top-1/2 right-4 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-accent/60 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-accent"
                         >
                             <ArrowRight className="size-4" />
                         </button>
@@ -97,13 +99,13 @@ export const Gallery = ({ photos, name }: IProps) => {
             </div>
 
             {photos.length && (
-                <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                <div className="mt-3 flex gap-2.5 overflow-x-auto pb-1 scrollbar-none [&::-webkit-scrollbar]:hidden">
                     {photos.map((photo, i) => (
                         <button
                             key={photo}
                             type="button"
                             onClick={() => setIndex(i)}
-                            aria-label={`Фото ${i + 1}`}
+                            aria-label={t("photoNumber", { n: i + 1 })}
                             className={`relative aspect-3/4 w-16 shrink-0 overflow-hidden rounded-sm ring-2 transition-all duration-200 sm:w-18 ${i === index ? "ring-accent" : "opacity-55 ring-transparent hover:opacity-90"
                                 }`}
                         >
@@ -123,8 +125,8 @@ export const Gallery = ({ photos, name }: IProps) => {
                     <button
                         type="button"
                         onClick={() => setLightbox(false)}
-                        aria-label="Закрыть"
-                        className="absolute top-4 right-4 z-10 flex size-10 items-center justify-center rounded-full border border-border bg-background/70 text-foreground-muted backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-foreground sm:top-6 sm:right-6"
+                        aria-label={t("close")}
+                        className="absolute cursor-pointer top-4 right-4 z-10 flex size-10 items-center justify-center rounded-full border border-border bg-background/70 text-foreground-muted backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-foreground sm:top-6 sm:right-6"
                     >
                         <X className="size-5" />
                     </button>
@@ -137,8 +139,8 @@ export const Gallery = ({ photos, name }: IProps) => {
                                     e.stopPropagation()
                                     prev()
                                 }}
-                                aria-label="Предыдущее фото"
-                                className="absolute top-1/2 left-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-foreground/50 sm:left-6 sm:size-11"
+                                aria-label={t("prevPhoto")}
+                                className="absolute cursor-pointer top-1/2 left-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-foreground/50 sm:left-6 sm:size-11"
                             >
                                 <ArrowLeft className="size-4" />
                             </button>
@@ -148,8 +150,8 @@ export const Gallery = ({ photos, name }: IProps) => {
                                     e.stopPropagation()
                                     next()
                                 }}
-                                aria-label="Следующее фото"
-                                className="absolute top-1/2 right-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-accent/60 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-accent sm:right-6 sm:size-11"
+                                aria-label={t("nextPhoto")}
+                                className="absolute cursor-pointer top-1/2 right-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-accent/60 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-accent sm:right-6 sm:size-11"
                             >
                                 <ArrowRight className="size-4" />
                             </button>
@@ -159,7 +161,7 @@ export const Gallery = ({ photos, name }: IProps) => {
                     <div className="animate-modal-in relative h-full max-h-[85vh] w-full max-w-4xl">
                         <Image
                             src={photos[index]}
-                            alt={`${name}, фото ${index + 1}`}
+                            alt={tProfile("photoAlt", { name, n: index + 1 })}
                             fill
                             sizes="90vw"
                             className="object-contain"

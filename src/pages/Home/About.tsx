@@ -1,9 +1,13 @@
 "use client"
 
+import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
+import { pick } from "@/lib/i18n-content"
 import { POINTS, VIDEOS } from "./constants"
 
 export const About = () => {
+    const t = useTranslations("homeAbout")
+    const locale = useLocale()
     const [active, setActive] = useState(0)
 
     return (
@@ -29,8 +33,8 @@ export const About = () => {
                                 key={src}
                                 type="button"
                                 onClick={() => setActive(i)}
-                                aria-label={`Видео ${i + 1}`}
-                                className={`relative aspect-square w-1/3 overflow-hidden rounded-sm border-2 transition-colors duration-200 ${i === active ? "border-accent" : "border-transparent hover:border-foreground/25"
+                                aria-label={t("videoAria", { n: i + 1 })}
+                                className={`relative cursor-pointer aspect-square w-1/3 overflow-hidden rounded-sm border-2 transition-colors duration-200 ${i === active ? "border-accent" : "border-transparent hover:border-foreground/25"
                                     }`}
                             >
                                 <video
@@ -47,22 +51,21 @@ export const About = () => {
                 </div>
 
                 <div>
-                    <span className="text-[11.5px] font-semibold tracking-[0.22em] text-accent-light uppercase">О салоне</span>
+                    <span className="text-[11.5px] font-semibold tracking-[0.22em] text-accent-light uppercase">{t("eyebrow")}</span>
                     <h2
                         className="mt-4 mb-6 text-[28px] leading-[1.15] font-medium text-foreground sm:text-[34px] lg:text-[38px]"
                         style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                     >
-                        Салон эротического массажа Podium —{" "}
-                        <em className="text-accent-light">лучшее место для отдыха</em>
+                        {t("titleStart")}{" "}
+                        <em className="text-accent-light">{t("titleAccent")}</em>
                     </h2>
 
                     <p className="text-[15px] leading-relaxed text-foreground-muted">
-                        Чтобы приятно провести время, не нужно ждать подходящего момента. Сделайте это прямо сейчас в
-                        стенах салона Podium! Мужчины очень любят компанию наших потрясающих мастериц, и это неудивительно.
+                        {t("intro")}
                     </p>
 
                     <div className="my-8 flex flex-col gap-5">
-                        {POINTS.map((text, i) => (
+                        {POINTS.map((point, i) => (
                             <div key={i} className="flex items-baseline gap-4.5">
                                 <span
                                     className="shrink-0 text-[15px] text-accent-light"
@@ -70,14 +73,13 @@ export const About = () => {
                                 >
                                     0{i + 1}
                                 </span>
-                                <span className="text-[14.5px] leading-relaxed text-foreground">{text}</span>
+                                <span className="text-[14.5px] leading-relaxed text-foreground">{pick(point, locale)}</span>
                             </div>
                         ))}
                     </div>
 
                     <p className="text-[15px] leading-relaxed text-foreground-muted">
-                        Не отказывайте себе в удовольствии и проведите время так, как давно мечтали! Ну а наши мастерицы
-                        составят вам приятную компанию.
+                        {t("outro")}
                     </p>
                 </div>
             </div>

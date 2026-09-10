@@ -17,10 +17,10 @@ export const EMPTY_FILTERS = {
 };
 
 export const CHECKLIST = [
-    "Ежедневно в заведении работает до 15 массажисток",
-    "Мы используем только реальные фото девушек",
-    "Все наши мастерицы профессионально обучены техникам массажа",
-    "Наши массажистки могут стать для вас ещё и интересным собеседником",
-    "Все процедуры выполняются профессиональными мастерами",
-    "Мы всегда готовы отправить вам дополнительные фото мастериц!",
+    { ru: "Ежедневно в заведении работает до 15 массажисток", en: "Up to 15 masseuses work at the salon every day" },
+    { ru: "Мы используем только реальные фото девушек", en: "We only use real photos of our girls" },
+    { ru: "Все наши мастерицы профессионально обучены техникам массажа", en: "All our masseuses are professionally trained in massage techniques" },
+    { ru: "Наши массажистки могут стать для вас ещё и интересным собеседником", en: "Our masseuses can also be great company for conversation" },
+    { ru: "Все процедуры выполняются профессиональными мастерами", en: "All treatments are performed by professional therapists" },
+    { ru: "Мы всегда готовы отправить вам дополнительные фото мастериц!", en: "We're always happy to send you extra photos of our masseuses!" },
 ];

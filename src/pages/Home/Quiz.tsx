@@ -1,10 +1,12 @@
 "use client"
 
 import { ArrowLeft, ArrowRight, Check, HelpCircle, Phone, User } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
 import { useState } from "react"
 import { Checkbox } from "@/components/Checkbox"
 import { formatPhone } from "@/lib/formatPhone"
+import { pick } from "@/lib/i18n-content"
 import { CONTACT_STEP, QUESTIONS, STEP_IMAGES, SUCCESS_STEP, TOTAL_STEPS } from "./constants"
 
 const inputClass =
@@ -19,6 +21,8 @@ const secondaryButtonClass =
 const headingFont = { fontFamily: "var(--font-cormorant), Arial, sans-serif" }
 
 export const Quiz = () => {
+    const t = useTranslations("homeQuiz")
+    const locale = useLocale()
     const [step, setStep] = useState(0)
     const [answers, setAnswers] = useState<string[]>(Array(TOTAL_STEPS).fill(""))
     const [name, setName] = useState("")
@@ -43,7 +47,7 @@ export const Quiz = () => {
 
     const handleSubmit = () => {
         if (!canSubmit) return
-        
+
         setStep(SUCCESS_STEP)
     }
 
@@ -61,13 +65,13 @@ export const Quiz = () => {
                 </div>
                 <div className="min-w-70 flex-1">
                     <h3 style={headingFont} className="mb-2.5 text-2xl font-medium text-foreground sm:text-[30px]">
-                        Не определились с выбором?
+                        {t("introTitle")}
                     </h3>
                     <p className="mb-6 max-w-115 text-sm leading-relaxed text-foreground-muted sm:text-[15px]">
-                        Отправьте заявку на подбор мастера и получите +30 минут на массаж в подарок!
+                        {t("introText")}
                     </p>
                     <button type="button" onClick={goNext} className={primaryButtonClass}>
-                        Подобрать
+                        {t("start")}
                         <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                     </button>
                 </div>
@@ -87,22 +91,23 @@ export const Quiz = () => {
                         ))}
                     </div>
                     <span className="rounded-full bg-foreground/8 px-2.5 py-1 text-[11px] font-bold tracking-wide text-foreground-faint uppercase">
-                        Вопрос {step} из {TOTAL_STEPS}
+                        {t("questionOf", { step, total: TOTAL_STEPS })}
                     </span>
                 </div>
 
                 <h3 style={headingFont} className="mb-5 text-xl font-medium text-foreground sm:text-2xl">
-                    {currentQuestion.title}
+                    {pick(currentQuestion.title, locale)}
                 </h3>
 
                 <div className="mb-7 flex flex-col gap-3 sm:max-w-125">
-                    {currentQuestion.options.map((option) => {
-                        const active = selectedAnswer === option
+                    {currentQuestion.options.map((option, i) => {
+                        const label = pick(option, locale)
+                        const active = selectedAnswer === label
                         return (
                             <button
-                                key={option}
+                                key={i}
                                 type="button"
-                                onClick={() => selectAnswer(option)}
+                                onClick={() => selectAnswer(label)}
                                 className={`flex items-center gap-3 rounded-xl border px-5 py-3.5 text-left text-sm font-semibold transition-all sm:text-[15px] ${active
                                     ? "border-accent bg-accent/10 text-foreground shadow-[0_0_0_1px] shadow-accent/40"
                                     : "border-foreground/15 text-foreground/75 hover:-translate-y-0.5 hover:border-foreground/30 hover:bg-foreground/3"
@@ -117,7 +122,7 @@ export const Quiz = () => {
                                             }`}
                                     />
                                 </span>
-                                {option}
+                                {label}
                             </button>
                         )
                     })}
@@ -126,10 +131,10 @@ export const Quiz = () => {
                 <div className="flex items-center gap-3">
                     <button type="button" onClick={goBack} className={secondaryButtonClass}>
                         <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
-                        Назад
+                        {t("back")}
                     </button>
                     <button type="button" onClick={goNext} disabled={!selectedAnswer} className={primaryButtonClass}>
-                        Далее
+                        {t("nextStep")}
                         <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                     </button>
                 </div>
@@ -140,10 +145,10 @@ export const Quiz = () => {
             <div key={step} className="animate-step-in grid w-full grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
                 <div>
                     <h3 style={headingFont} className="mb-2.5 text-2xl font-medium text-foreground sm:text-[28px]">
-                        Заполните контактные данные
+                        {t("contactTitle")}
                     </h3>
                     <p className="max-w-100 text-sm leading-relaxed text-foreground-muted sm:text-[15px]">
-                        Наш администратор свяжется с Вами, предоставив подходящих Вам мастеров!
+                        {t("contactText")}
                     </p>
                 </div>
 
@@ -154,7 +159,7 @@ export const Quiz = () => {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            placeholder="Ваше имя"
+                            placeholder={t("namePlaceholder")}
                             className={inputClass}
                         />
                     </div>
@@ -165,7 +170,7 @@ export const Quiz = () => {
                             inputMode="tel"
                             value={phone}
                             onChange={(e) => setPhone(formatPhone(e.target.value))}
-                            placeholder="+7 (___) ___-__-__"
+                            placeholder={t("phonePlaceholder")}
                             maxLength={18}
                             className={inputClass}
                         />
@@ -174,13 +179,13 @@ export const Quiz = () => {
                     <Checkbox
                         checked={consent}
                         onChange={(e) => setConsent(e.target.checked)}
-                        label="Согласен(а) на обработку персональных данных и с политикой конфиденциальности"
+                        label={t("consentLabel")}
                     />
 
                     <div className="mt-1 flex items-center gap-3">
                         <button type="button" onClick={goBack} className={`${secondaryButtonClass} h-13`}>
                             <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-1" />
-                            Назад
+                            {t("back")}
                         </button>
                         <button
                             type="button"
@@ -188,7 +193,7 @@ export const Quiz = () => {
                             disabled={!canSubmit}
                             className={`${primaryButtonClass} h-13 flex-1 justify-center`}
                         >
-                            Отправить
+                            {t("submit")}
                             <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                         </button>
                     </div>
@@ -205,10 +210,10 @@ export const Quiz = () => {
                     </div>
                 </div>
                 <h3 style={headingFont} className="mb-2 text-xl font-medium text-foreground sm:text-2xl">
-                    Заявка отправлена
+                    {t("successTitle")}
                 </h3>
                 <p className="max-w-105 text-sm leading-relaxed text-foreground-muted sm:text-[15px]">
-                    Наш администратор свяжется с Вами в ближайшее время и предложит подходящих мастеров.
+                    {t("successText")}
                 </p>
             </div>
         )
@@ -239,4 +244,4 @@ export const Quiz = () => {
             </div>
         </section>
     )
-}
+};

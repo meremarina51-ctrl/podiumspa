@@ -1,18 +1,25 @@
 "use client"
 
 import { ArrowLeft, ArrowRight } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { useRef } from "react"
+import { pick } from "@/lib/i18n-content"
 import { STAFF } from "@/lib/staff"
 import { GRADIENTS } from "@/pages/Staff/constants"
 import { RELATED_COUNT } from "./constants"
+import { ROUTES } from "@/lib/routes"
 
 interface IProps {
     currentIndex: number
 }
 
 export const RelatedStaff = ({ currentIndex }: IProps) => {
+    const t = useTranslations("relatedStaff")
+    const tCommon = useTranslations("common")
+    const tStaff = useTranslations("staffPage")
+    const locale = useLocale()
     const scrollRef = useRef<HTMLDivElement>(null)
 
     const count = Math.min(RELATED_COUNT, STAFF.length - 1)
@@ -32,23 +39,23 @@ export const RelatedStaff = ({ currentIndex }: IProps) => {
                     className="text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
                     style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
-                    Другие <em className="text-accent-light">девушки</em>
+                    {t("titleStart")} <em className="text-accent-light">{t("titleAccent")}</em>
                 </h2>
                 <Link
-                    href="/staff"
+                    href={ROUTES.STAFF}
                     className="border-b border-accent-wash-strong pb-1 text-[12.5px] font-semibold tracking-[0.08em] text-accent-light uppercase transition-colors duration-200 hover:text-foreground"
                 >
-                    Смотреть всех
+                    {tCommon("viewAllPeople")}
                 </Link>
             </div>
 
             <div className="relative">
                 <div
                     ref={scrollRef}
-                    className="flex gap-5 overflow-x-auto pb-2 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                    className="flex gap-5 overflow-x-auto pb-2 scroll-smooth scrollbar-none [&::-webkit-scrollbar]:hidden"
                 >
                     {related.map((girl, i) => (
-                        <Link key={girl.name} href={`/staff/${girl.index}`} className="group block w-40 shrink-0 sm:w-48">
+                        <Link key={girl.index} href={`${ROUTES.STAFF}/${girl.index}`} className="group block w-40 shrink-0 sm:w-48">
                             <div
                                 className="relative aspect-3/4 overflow-hidden rounded-sm transition-transform duration-300 ease-out group-hover:-translate-y-1"
                                 style={{ background: GRADIENTS[i % GRADIENTS.length] }}
@@ -56,7 +63,7 @@ export const RelatedStaff = ({ currentIndex }: IProps) => {
                                 {girl.photos[0] && (
                                     <Image
                                         src={girl.photos[0]}
-                                        alt={girl.name}
+                                        alt={pick(girl.name, locale)}
                                         fill
                                         sizes="(min-width: 640px) 192px, 160px"
                                         className="object-cover"
@@ -67,12 +74,12 @@ export const RelatedStaff = ({ currentIndex }: IProps) => {
                                 className="mt-3.5 text-[20px] leading-none text-foreground transition-colors duration-200 group-hover:text-accent-light"
                                 style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                             >
-                                {girl.name}{girl.age ? `, ${girl.age}` : ""}
+                                {pick(girl.name, locale)}{girl.age ? `, ${girl.age}` : ""}
                             </p>
                             <p className="mt-1 text-[12.5px] text-foreground-faint">
-                                {girl.height ? `Рост: ${girl.height} · ` : ""}
-                                {girl.weight ? `Вес: ${girl.weight} · ` : ""}
-                                Грудь: {girl.bust}
+                                {girl.height ? `${tStaff("cardHeight")}: ${girl.height} · ` : ""}
+                                {girl.weight ? `${tStaff("cardWeight")}: ${girl.weight} · ` : ""}
+                                {tStaff("cardBust")}: {girl.bust}
                             </p>
                         </Link>
                     ))}
@@ -81,16 +88,16 @@ export const RelatedStaff = ({ currentIndex }: IProps) => {
                 <button
                     type="button"
                     onClick={() => scrollBy(-1)}
-                    aria-label="Назад"
-                    className="absolute top-[38%] -left-4 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/20 bg-background text-foreground shadow-lg transition-colors duration-200 hover:border-foreground/40 lg:flex"
+                    aria-label={tCommon("carouselBack")}
+                    className="absolute cursor-pointer top-[38%] -left-4 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/20 bg-background text-foreground shadow-lg transition-colors duration-200 hover:border-foreground/40 lg:flex"
                 >
                     <ArrowLeft className="size-4" />
                 </button>
                 <button
                     type="button"
                     onClick={() => scrollBy(1)}
-                    aria-label="Вперёд"
-                    className="absolute top-[38%] -right-4 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-accent/50 bg-background text-foreground shadow-lg transition-colors duration-200 hover:border-accent lg:flex"
+                    aria-label={tCommon("carouselNext")}
+                    className="absolute cursor-pointer top-[38%] -right-4 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-accent/50 bg-background text-foreground shadow-lg transition-colors duration-200 hover:border-accent lg:flex"
                 >
                     <ArrowRight className="size-4" />
                 </button>

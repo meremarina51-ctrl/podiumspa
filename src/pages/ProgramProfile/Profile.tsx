@@ -1,9 +1,11 @@
 "use client"
 
 import { Clock, Maximize2, Wallet, X } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
 import { useState } from "react"
 import { OrderModal } from "@/components/OrderModal"
+import { pick } from "@/lib/i18n-content"
 import type { ALL_PROGRAMMS } from "@/lib/programms"
 
 interface IProps {
@@ -11,10 +13,15 @@ interface IProps {
 }
 
 export const Profile = ({ program }: IProps) => {
+    const t = useTranslations("programProfile")
+    const tCommon = useTranslations("common")
+    const locale = useLocale()
     const [isOrderOpen, setOrderOpen] = useState(false)
     const [isLightbox, setLightbox] = useState(false)
 
-    const [price, duration] = program.price.split("·").map((part) => part.trim())
+    const name = pick(program.name, locale)
+    const bio = pick(program.bio, locale)
+    const [price, duration] = pick(program.price, locale).split("·").map((part) => part.trim())
 
     return (
         <section className="relative overflow-hidden">
@@ -26,12 +33,12 @@ export const Profile = ({ program }: IProps) => {
                     <button
                         type="button"
                         onClick={() => setLightbox(true)}
-                        aria-label="Открыть фото на весь экран"
+                        aria-label={tCommon("openFullscreen")}
                         className="group relative aspect-4/5 w-full cursor-zoom-in overflow-hidden rounded-sm"
                     >
                         <Image
                             src={program.photo}
-                            alt={program.name}
+                            alt={name}
                             fill
                             sizes="(min-width: 1024px) 440px, 100vw"
                             className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
@@ -44,13 +51,13 @@ export const Profile = ({ program }: IProps) => {
 
                     <div>
                         <span className="mb-3 block text-[11px] font-semibold tracking-[0.15em] text-accent-light uppercase">
-                            Программа
+                            {t("eyebrow")}
                         </span>
                         <h1
                             className="text-[40px] leading-none font-medium text-foreground sm:text-[48px]"
                             style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
-                            {program.name}
+                            {name}
                         </h1>
 
                         <div className="mt-7 flex flex-wrap gap-3">
@@ -60,7 +67,7 @@ export const Profile = ({ program }: IProps) => {
                                         <Wallet className="size-4" />
                                     </div>
                                     <div>
-                                        <p className="text-[11px] font-semibold tracking-widest text-foreground-faint uppercase">Цена</p>
+                                        <p className="text-[11px] font-semibold tracking-widest text-foreground-faint uppercase">{t("price")}</p>
                                         <p className="text-[15px] font-semibold text-foreground">{price}</p>
                                     </div>
                                 </div>
@@ -71,7 +78,7 @@ export const Profile = ({ program }: IProps) => {
                                         <Clock className="size-4" />
                                     </div>
                                     <div>
-                                        <p className="text-[11px] font-semibold tracking-widest text-foreground-faint uppercase">Время</p>
+                                        <p className="text-[11px] font-semibold tracking-widest text-foreground-faint uppercase">{t("duration")}</p>
                                         <p className="text-[15px] font-semibold text-foreground">{duration}</p>
                                     </div>
                                 </div>
@@ -79,7 +86,7 @@ export const Profile = ({ program }: IProps) => {
                         </div>
 
                         <p className="mt-7 max-w-160 text-[14.5px] leading-relaxed text-foreground-muted">
-                            {program.bio}
+                            {bio}
                         </p>
 
                         <button
@@ -87,7 +94,7 @@ export const Profile = ({ program }: IProps) => {
                             onClick={() => setOrderOpen(true)}
                             className="mt-8 inline-flex items-center justify-center rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-dark"
                         >
-                            Записаться
+                            {tCommon("bookCta")}
                         </button>
                     </div>
                 </div>
@@ -99,18 +106,18 @@ export const Profile = ({ program }: IProps) => {
                     <button
                         type="button"
                         onClick={() => setLightbox(false)}
-                        aria-label="Закрыть"
+                        aria-label={tCommon("close")}
                         className="absolute top-4 right-4 z-10 flex size-10 items-center justify-center rounded-full border border-border bg-background/70 text-foreground-muted backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-foreground sm:top-6 sm:right-6"
                     >
                         <X className="size-5" />
                     </button>
                     <div className="animate-modal-in relative h-full max-h-[85vh] w-full max-w-4xl">
-                        <Image src={program.photo} alt={program.name} fill sizes="90vw" className="object-contain" />
+                        <Image src={program.photo} alt={name} fill sizes="90vw" className="object-contain" />
                     </div>
                 </div>
             )}
 
-            <OrderModal title={program.name} open={isOrderOpen} onClose={() => setOrderOpen(false)} />
+            <OrderModal title={name} open={isOrderOpen} onClose={() => setOrderOpen(false)} />
         </section>
     )
 };

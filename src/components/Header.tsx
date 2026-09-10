@@ -1,10 +1,13 @@
 "use client"
 
 import { Menu, X } from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { useLocale, useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
+import { Link, usePathname } from "@/i18n/navigation"
 import { address, ALL_NAV_ITEMS, hours, LEFT_NAV_ITEMS, phone, RIGHT_NAV_ITEMS } from "@/components/constants"
+import { LanguageSwitcher } from "@/components/LanguageSwitcher"
+import { pick } from "@/lib/i18n-content"
+import { ROUTES } from "@/lib/routes"
 
 const navLinkClass = (active: boolean) =>
     `text-[13.5px] font-medium transition-colors duration-200 ease-out ${active ? "text-accent-light" : "text-foreground/62 hover:text-accent-light"
@@ -12,13 +15,16 @@ const navLinkClass = (active: boolean) =>
 
 export const Header = () => {
     const pathname = usePathname()
+    const locale = useLocale()
+    const t = useTranslations("header")
+    const tCommon = useTranslations("common")
     const [isOpen, setOpen] = useState(false)
 
     useEffect(() => {
         if (!isOpen) return
 
         document.body.style.overflow = "hidden"
-        
+
         return () => {
             document.body.style.overflow = ""
         }
@@ -29,9 +35,9 @@ export const Header = () => {
             <header className="sticky top-0 z-50 flex w-full flex-col bg-background/95 backdrop-blur-sm">
                 <div className="border-b border-border bg-surface-2 max-lg:hidden">
                     <div className="mx-auto flex h-9.5 w-full max-w-340 items-center justify-between px-14 text-xs text-foreground-faint">
-                        <span>{hours.join(", ")}</span>
+                        <span>{hours.map((h) => pick(h, locale)).join(", ")}</span>
                         <span className="flex items-center gap-2">
-                            {address}
+                            {pick(address, locale)}
                             <span className="inline-block h-1 w-1 rounded-full bg-foreground-faint" />
                             {phone}
                         </span>
@@ -42,13 +48,13 @@ export const Header = () => {
                     <div className="mx-auto grid h-18 w-full max-w-340 grid-cols-[1fr_auto_1fr] items-center gap-6 px-6 md:h-26 md:px-14">
                         <nav className="col-start-1 hidden items-center gap-7.5 lg:flex">
                             {LEFT_NAV_ITEMS.map((item) => (
-                                <Link key={item.name} href={item.href} className={navLinkClass(pathname === item.href)}>
-                                    {item.name}
+                                <Link key={item.href} href={item.href} className={navLinkClass(pathname === item.href)}>
+                                    {pick(item.name, locale)}
                                 </Link>
                             ))}
                         </nav>
 
-                        <Link href="/" className="group col-start-2 flex items-center gap-2.5 whitespace-nowrap justify-self-start lg:justify-self-auto">
+                        <Link href={ROUTES.HOME} className="group col-start-2 flex items-center gap-2.5 whitespace-nowrap justify-self-start lg:justify-self-auto">
                             <span
                                 className="h-3 w-3 shrink-0 rotate-45 transition-transform duration-300 ease-out group-hover:scale-125 group-hover:rotate-225"
                                 style={{ background: "linear-gradient(135deg, var(--accent-light), var(--accent))" }}
@@ -57,29 +63,33 @@ export const Header = () => {
                                 PODIUM
                             </span>
                         </Link>
-                            
+
                         <div className="col-start-3 flex items-center justify-end gap-7.5">
                             <nav className="hidden items-center gap-7.5 lg:flex">
                                 {RIGHT_NAV_ITEMS.map((item) => (
-                                    <Link key={item.name} href={item.href} className={navLinkClass(pathname === item.href)}>
-                                        {item.name}
+                                    <Link key={item.href} href={item.href} className={navLinkClass(pathname === item.href)}>
+                                        {pick(item.name, locale)}
                                     </Link>
                                 ))}
                             </nav>
 
+                            <div className="hidden lg:block">
+                                <LanguageSwitcher />
+                            </div>
+
                             <Link
-                                href="/contacts"
+                                href={ROUTES.CONTACTS}
                                 className="hidden shrink-0 rounded-full border px-6 py-2.5 text-[13.5px] font-semibold tracking-[0.03em] text-foreground transition-colors hover:bg-accent-wash sm:inline-flex"
                                 style={{ borderColor: "rgba(214,38,111,0.5)" }}
                             >
-                                Записаться
+                                {tCommon("bookCta")}
                             </Link>
 
                             <button
                                 type="button"
                                 onClick={() => setOpen(true)}
-                                aria-label="Открыть меню"
-                                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-foreground/15 text-foreground transition-colors duration-200 hover:border-foreground/30 lg:hidden"
+                                aria-label={t("openMenu")}
+                                className="flex cursor-pointer h-9 w-9 shrink-0 items-center justify-center rounded-full border border-foreground/15 text-foreground transition-colors duration-200 hover:border-foreground/30 lg:hidden"
                             >
                                 <Menu className="size-5" />
                             </button>
@@ -100,15 +110,18 @@ export const Header = () => {
                     }`}
             >
                 <div className="mb-8 flex items-center justify-between">
-                    <span className="text-xs font-bold tracking-wide text-foreground-faint uppercase">Меню</span>
-                    <button
-                        type="button"
-                        onClick={() => setOpen(false)}
-                        aria-label="Закрыть меню"
-                        className="flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 text-foreground transition-colors duration-200 hover:border-foreground/30"
-                    >
-                        <X className="size-5" />
-                    </button>
+                    <span className="text-xs font-bold tracking-wide text-foreground-faint uppercase">{t("menu")}</span>
+                    <div className="flex items-center gap-2.5">
+                        <LanguageSwitcher />
+                        <button
+                            type="button"
+                            onClick={() => setOpen(false)}
+                            aria-label={t("closeMenu")}
+                            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-foreground/15 text-foreground transition-colors duration-200 hover:border-foreground/30"
+                        >
+                            <X className="size-5" />
+                        </button>
+                    </div>
                 </div>
 
                 <nav>
@@ -123,7 +136,7 @@ export const Header = () => {
                                         : "text-foreground/70 hover:bg-foreground/5 hover:text-foreground"
                                         }`}
                                 >
-                                    {item.name}
+                                    {pick(item.name, locale)}
                                 </Link>
                             </li>
                         ))}
@@ -132,16 +145,16 @@ export const Header = () => {
 
                 <div className="mt-auto flex flex-col gap-4 border-t border-border pt-6">
                     <Link
-                        href="/contacts"
+                        href={ROUTES.CONTACTS}
                         onClick={() => setOpen(false)}
                         className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-semibold tracking-[0.03em] text-white transition-colors duration-200 hover:bg-accent-dark"
                     >
-                        Записаться
+                        {tCommon("bookCta")}
                     </Link>
                     <a href={`tel:${phone.replace(/[^+\d]/g, "")}`} className="text-base font-bold text-foreground">
                         {phone}
                     </a>
-                    <p className="text-xs leading-relaxed text-foreground-faint">{address}</p>
+                    <p className="text-xs leading-relaxed text-foreground-faint">{pick(address, locale)}</p>
                 </div>
             </aside>
         </>

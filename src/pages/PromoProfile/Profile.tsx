@@ -1,9 +1,11 @@
 "use client"
 
 import { Maximize2, X } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
 import { useState } from "react"
 import { OrderModal } from "@/components/OrderModal"
+import { pick } from "@/lib/i18n-content"
 import type { PROMOS } from "@/lib/promo"
 
 interface IProps {
@@ -11,6 +13,13 @@ interface IProps {
 }
 
 export const Profile = ({ promo }: IProps) => {
+    const t = useTranslations("promoPage")
+    const tProfile = useTranslations("promoProfile")
+    const tCommon = useTranslations("common")
+    const locale = useLocale()
+    
+    const name = pick(promo.name, locale)
+
     const [isOrderOpen, setOrderOpen] = useState(false)
     const [isLightbox, setLightbox] = useState(false)
 
@@ -23,42 +32,42 @@ export const Profile = ({ promo }: IProps) => {
                 <div className="grid grid-cols-1 gap-10 lg:grid-cols-[1fr_440px]">
                     <div>
                         <span className="mb-3 block text-[11px] font-semibold tracking-[0.15em] text-accent-light uppercase">
-                            {promo.expired ? "Акция завершена" : "Акция"}
+                            {promo.expired ? t("expired") : t("active")}
                         </span>
                         <h1
                             className="text-[40px] leading-none font-medium text-foreground sm:text-[48px]"
                             style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
-                            {promo.name}
+                            {name}
                         </h1>
 
                         <p className="mt-7 max-w-160 text-[14.5px] leading-relaxed text-foreground-muted">
-                            {promo.bio}
+                            {pick(promo.bio, locale)}
                         </p>
 
                         <button
                             type="button"
                             onClick={() => setOrderOpen(true)}
-                            className="mt-8 inline-flex items-center justify-center rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-foreground/10 disabled:text-foreground-faint"
+                            className="mt-8 cursor-pointer inline-flex items-center justify-center rounded-full bg-accent px-8 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-foreground/10 disabled:text-foreground-faint"
                             disabled={promo.expired}
                         >
-                            Записаться
+                            {tCommon("bookCta")}
                         </button>
 
                         <p className="mt-6 text-[11.5px] font-semibold tracking-[0.08em] text-foreground-faint uppercase">
-                            Опубликовано: {promo.date}
+                            {tProfile("publishedOn", { date: promo.date })}
                         </p>
                     </div>
 
                     <button
                         type="button"
                         onClick={() => setLightbox(true)}
-                        aria-label="Открыть фото на весь экран"
+                        aria-label={tCommon("openFullscreen")}
                         className="group relative aspect-4/5 w-full cursor-zoom-in overflow-hidden rounded-sm"
                     >
                         <Image
                             src={promo.photo}
-                            alt={promo.name}
+                            alt={name}
                             fill
                             sizes="(min-width: 1024px) 440px, 100vw"
                             className={`object-cover transition-transform duration-500 ease-out group-hover:scale-105 ${promo.expired ? "grayscale" : ""}`}
@@ -77,18 +86,18 @@ export const Profile = ({ promo }: IProps) => {
                     <button
                         type="button"
                         onClick={() => setLightbox(false)}
-                        aria-label="Закрыть"
-                        className="absolute top-4 right-4 z-10 flex size-10 items-center justify-center rounded-full border border-border bg-background/70 text-foreground-muted backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-foreground sm:top-6 sm:right-6"
+                        aria-label={tCommon("close")}
+                        className="absolute cursor-pointer top-4 right-4 z-10 flex size-10 items-center justify-center rounded-full border border-border bg-background/70 text-foreground-muted backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-foreground sm:top-6 sm:right-6"
                     >
                         <X className="size-5" />
                     </button>
                     <div className="animate-modal-in relative h-full max-h-[85vh] w-full max-w-4xl">
-                        <Image src={promo.photo} alt={promo.name} fill sizes="90vw" className="object-contain" />
+                        <Image src={promo.photo} alt={name} fill sizes="90vw" className="object-contain" />
                     </div>
                 </div>
             )}
 
-            <OrderModal title={promo.name} open={isOrderOpen} onClose={() => setOrderOpen(false)} />
+            <OrderModal title={name} open={isOrderOpen} onClose={() => setOrderOpen(false)} />
         </section>
     )
 };

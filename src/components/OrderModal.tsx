@@ -1,12 +1,13 @@
 "use client"
 
 import { Check, Phone, User, X } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useEffect, useState } from "react"
 import { Checkbox } from "@/components/Checkbox"
 import { phone } from "@/components/constants"
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon"
 import { formatPhone } from "@/lib/formatPhone"
-import { WHATSAPP_HREF } from "@/pages/Home/constants"
+import { WHATSAPP_HREF } from "@/lib/constants"
 
 interface IProps {
     title: string
@@ -20,6 +21,8 @@ const inputClass =
 const headingFont = { fontFamily: "var(--font-cormorant), Arial, sans-serif" }
 
 export const OrderModal = ({ title, open, onClose }: IProps) => {
+    const t = useTranslations("orderModal")
+    const tCommon = useTranslations("common")
     const [name, setName] = useState("")
     const [phoneValue, setPhoneValue] = useState("")
     const [isConsent, setConsent] = useState(false)
@@ -77,8 +80,8 @@ export const OrderModal = ({ title, open, onClose }: IProps) => {
                 <button
                     type="button"
                     onClick={onClose}
-                    aria-label="Закрыть"
-                    className="absolute top-5 right-5 flex size-9 items-center justify-center rounded-full border border-foreground/15 text-foreground transition-colors duration-200 hover:border-foreground/30"
+                    aria-label={tCommon("close")}
+                    className="absolute cursor-pointer top-5 right-5 flex size-9 items-center justify-center rounded-full border border-foreground/15 text-foreground transition-colors duration-200 hover:border-foreground/30"
                 >
                     <X className="size-4.5" />
                 </button>
@@ -92,10 +95,10 @@ export const OrderModal = ({ title, open, onClose }: IProps) => {
                             </div>
                         </div>
                         <h3 style={headingFont} className="mb-2 text-xl font-medium text-foreground sm:text-2xl">
-                            Заявка отправлена
+                            {t("submittedTitle")}
                         </h3>
                         <p className="max-w-80 text-sm leading-relaxed text-foreground-muted">
-                            Наш администратор свяжется с Вами в ближайшее время.
+                            {t("submittedText")}
                         </p>
                     </div>
                 ) : (
@@ -103,7 +106,7 @@ export const OrderModal = ({ title, open, onClose }: IProps) => {
                         <h3 style={headingFont} className="mb-3 pr-10 text-[30px] leading-none font-medium text-foreground sm:text-[34px]">
                             {title}
                         </h3>
-                        <p className="mb-4 text-[13.5px] text-foreground-muted">Работаем по записи — звоните заранее!</p>
+                        <p className="mb-4 text-[13.5px] text-foreground-muted">{t("bookingNote")}</p>
 
                         <div className="mb-6 flex items-center gap-2.5">
                             <a href={`tel:${phone.replace(/[^+\d]/g, "")}`} className="text-base font-bold text-foreground">
@@ -111,7 +114,7 @@ export const OrderModal = ({ title, open, onClose }: IProps) => {
                             </a>
                             <a
                                 href={WHATSAPP_HREF}
-                                aria-label="Написать в WhatsApp"
+                                aria-label={tCommon("writeWhatsapp")}
                                 className="flex size-6 items-center justify-center rounded-full bg-[#25D366]/15"
                             >
                                 <WhatsAppIcon className="size-3.5 text-[#25D366]" />
@@ -121,7 +124,7 @@ export const OrderModal = ({ title, open, onClose }: IProps) => {
                         <div className="flex flex-col gap-4">
                             <div>
                                 <span className="mb-2 block text-[11px] font-semibold tracking-widest text-foreground-faint uppercase">
-                                    Ваше имя
+                                    {t("nameLabel")}
                                 </span>
                                 <div className="relative">
                                     <User className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-foreground-faint" />
@@ -129,7 +132,7 @@ export const OrderModal = ({ title, open, onClose }: IProps) => {
                                         type="text"
                                         value={name}
                                         onChange={(e) => setName(e.target.value)}
-                                        placeholder="Введите имя"
+                                        placeholder={t("namePlaceholder")}
                                         className={inputClass}
                                     />
                                 </div>
@@ -137,7 +140,7 @@ export const OrderModal = ({ title, open, onClose }: IProps) => {
 
                             <div>
                                 <span className="mb-2 block text-[11px] font-semibold tracking-widest text-foreground-faint uppercase">
-                                    Номер телефона
+                                    {t("phoneLabel")}
                                 </span>
                                 <div className="relative">
                                     <Phone className="pointer-events-none absolute top-1/2 left-4 size-4 -translate-y-1/2 text-foreground-faint" />
@@ -157,16 +160,16 @@ export const OrderModal = ({ title, open, onClose }: IProps) => {
                                 id="order-consent"
                                 checked={isConsent}
                                 onChange={(e) => setConsent(e.target.checked)}
-                                label="Нажимая «Отправить», вы соглашаетесь с политикой конфиденциальности"
+                                label={t("consentLabel")}
                             />
 
                             <button
                                 type="button"
                                 onClick={handleSubmit}
                                 disabled={!canSubmit}
-                                className="rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-foreground/10 disabled:text-foreground-faint"
+                                className="rounded-full cursor-pointer bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-foreground/10 disabled:text-foreground-faint"
                             >
-                                Отправить
+                                {t("submit")}
                             </button>
                         </div>
                     </>

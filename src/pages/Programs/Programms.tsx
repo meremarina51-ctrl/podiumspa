@@ -1,16 +1,24 @@
 "use client"
 
 import { RotateCcw, SlidersHorizontal, X } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import Image from "next/image"
-import Link from "next/link"
+import { Link } from "@/i18n/navigation"
 import { useEffect, useMemo, useState } from "react"
 import { ALL_PROGRAMMS } from "@/lib/programms"
+import { pick } from "@/lib/i18n-content"
 import { EMPTY_FILTERS, PAGE_SIZE } from "./constants"
 import { parseTiers } from "@/lib/parseTiers"
-
-const PROGRAMS = ALL_PROGRAMMS.map((program, index) => ({ ...program, tiers: parseTiers(program.price), index }))
+import { ROUTES } from "@/lib/routes"
 
 export const Programms = () => {
+    const t = useTranslations("programsPage")
+    const tCommon = useTranslations("common")
+    const locale = useLocale()
+    const PROGRAMS = useMemo(
+        () => ALL_PROGRAMMS.map((program, index) => ({ ...program, tiers: parseTiers(pick(program.price, locale)), index })),
+        [locale]
+    )
     const [priceFrom, setPriceFrom] = useState("")
     const [priceTo, setPriceTo] = useState("")
     const [durationFrom, setDurationFrom] = useState("")
@@ -42,7 +50,7 @@ export const Programms = () => {
                 return true
             })
         )
-    }, [filters])
+    }, [filters, PROGRAMS])
 
     const applyFilters = () => {
         setFilters({ priceFrom, priceTo, durationFrom, durationTo })
@@ -73,13 +81,13 @@ export const Programms = () => {
     const filterFields = (
         <>
             <div className="basis-[calc(50%-0.625rem)] sm:basis-auto">
-                <span className="mb-2.5 block text-[11px] font-semibold tracking-widest text-foreground-faint uppercase">Цена, ₽</span>
+                <span className="mb-2.5 block text-[11px] font-semibold tracking-widest text-foreground-faint uppercase">{t("price")}</span>
                 <div className={rangeGroupClass}>
                     <input
                         type="number"
                         value={priceFrom}
                         onChange={(e) => setPriceFrom(e.target.value)}
-                        placeholder="От"
+                        placeholder={tCommon("from")}
                         className={rangeInputClass}
                     />
                     <span className="text-foreground-faint">—</span>
@@ -87,20 +95,20 @@ export const Programms = () => {
                         type="number"
                         value={priceTo}
                         onChange={(e) => setPriceTo(e.target.value)}
-                        placeholder="До"
+                        placeholder={tCommon("to")}
                         className={rangeInputClass}
                     />
                 </div>
             </div>
 
             <div className="basis-[calc(50%-0.625rem)] sm:basis-auto">
-                <span className="mb-2.5 block text-[11px] font-semibold tracking-widest text-foreground-faint uppercase">Время, мин</span>
+                <span className="mb-2.5 block text-[11px] font-semibold tracking-widest text-foreground-faint uppercase">{t("duration")}</span>
                 <div className={rangeGroupClass}>
                     <input
                         type="number"
                         value={durationFrom}
                         onChange={(e) => setDurationFrom(e.target.value)}
-                        placeholder="От"
+                        placeholder={tCommon("from")}
                         className={rangeInputClass}
                     />
                     <span className="text-foreground-faint">—</span>
@@ -108,7 +116,7 @@ export const Programms = () => {
                         type="number"
                         value={durationTo}
                         onChange={(e) => setDurationTo(e.target.value)}
-                        placeholder="До"
+                        placeholder={tCommon("to")}
                         className={rangeInputClass}
                     />
                 </div>
@@ -122,7 +130,7 @@ export const Programms = () => {
                 className="mb-9 text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
                 style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
             >
-                Программы
+                {t("title")}
             </h2>
 
             <div className="mb-8 flex items-center gap-3 sm:hidden">
@@ -132,7 +140,7 @@ export const Programms = () => {
                     className="flex h-11 flex-1 items-center justify-center gap-2 rounded-full border border-border text-[13px] font-semibold text-foreground transition-colors duration-200 hover:border-accent-light hover:text-accent-light"
                 >
                     <SlidersHorizontal className="size-4" />
-                    Фильтры
+                    {tCommon("filters")}
                     {activeCount > 0 && (
                         <span className="flex size-5 items-center justify-center rounded-full bg-accent text-[11px] font-bold text-white">
                             {activeCount}
@@ -143,7 +151,7 @@ export const Programms = () => {
                     <button
                         type="button"
                         onClick={resetFilters}
-                        aria-label="Сбросить фильтры"
+                        aria-label={tCommon("resetFilters")}
                         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border text-foreground-muted transition-colors duration-200 hover:border-accent-light hover:text-accent-light"
                     >
                         <RotateCcw className="size-4" />
@@ -161,17 +169,17 @@ export const Programms = () => {
                         disabled={!isDirty}
                         className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-foreground/10 disabled:text-foreground-faint disabled:hover:bg-foreground/10"
                     >
-                        Применить
+                        {tCommon("apply")}
                     </button>
                     <button
                         type="button"
                         onClick={resetFilters}
                         disabled={!canReset}
-                        aria-label="Сбросить фильтры"
+                        aria-label={tCommon("resetFilters")}
                         className="flex h-11 items-center gap-2 rounded-full border border-border px-4 text-[13px] font-semibold text-foreground-muted transition-colors duration-200 hover:border-accent-light hover:text-accent-light disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-foreground-muted"
                     >
                         <RotateCcw className="size-3.5" />
-                        Сбросить
+                        {tCommon("reset")}
                     </button>
                 </div>
             </div>
@@ -188,11 +196,11 @@ export const Programms = () => {
                     }`}
             >
                 <div className="flex items-center justify-between border-b border-border px-6 py-5">
-                    <span className="text-xs font-bold tracking-wide text-foreground-faint uppercase">Фильтры</span>
+                    <span className="text-xs font-bold tracking-wide text-foreground-faint uppercase">{tCommon("filters")}</span>
                     <button
                         type="button"
                         onClick={() => setFiltersOpen(false)}
-                        aria-label="Закрыть фильтры"
+                        aria-label={tCommon("closeFilters")}
                         className="flex h-9 w-9 items-center justify-center rounded-full border border-foreground/15 text-foreground transition-colors duration-200 hover:border-foreground/30"
                     >
                         <X className="size-5" />
@@ -210,33 +218,33 @@ export const Programms = () => {
                         disabled={!isDirty}
                         className="flex-1 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-dark disabled:cursor-not-allowed disabled:bg-foreground/10 disabled:text-foreground-faint disabled:hover:bg-foreground/10"
                     >
-                        Применить
+                        {tCommon("apply")}
                     </button>
                     <button
                         type="button"
                         onClick={resetFilters}
                         disabled={!canReset}
-                        aria-label="Сбросить фильтры"
+                        aria-label={tCommon("resetFilters")}
                         className="flex h-12 items-center gap-2 rounded-full border border-border px-4 text-[13px] font-semibold text-foreground-muted transition-colors duration-200 hover:border-accent-light hover:text-accent-light disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-border disabled:hover:text-foreground-muted"
                     >
                         <RotateCcw className="size-3.5" />
-                        Сбросить
+                        {tCommon("reset")}
                     </button>
                 </div>
             </div>
 
             {filtered.length === 0 ? (
                 <p className="py-10 text-center text-[14.5px] text-foreground-muted">
-                    По заданным параметрам программ не найдено.
+                    {t("empty")}
                 </p>
             ) : (
                 <div className="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                     {filtered.slice(0, visible).map((program) => (
-                        <Link key={program.name} href={`/programs/${program.index}`} className="group block">
+                        <Link key={program.index} href={`${ROUTES.PROGRAMS}/${program.index}`} className="group block">
                             <div className="relative aspect-4/5 overflow-hidden rounded-sm">
                                 <Image
                                     src={program.photo}
-                                    alt={program.name}
+                                    alt={pick(program.name, locale)}
                                     fill
                                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                                     className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
@@ -246,10 +254,10 @@ export const Programms = () => {
                                 className="mt-4 text-[22px] leading-none font-medium text-foreground transition-colors duration-200 group-hover:text-accent-light"
                                 style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                             >
-                                {program.name}
+                                {pick(program.name, locale)}
                             </p>
                             <p className="mt-1.5 text-[14px] whitespace-pre-line text-foreground-faint">
-                                {program.price}
+                                {pick(program.price, locale)}
                             </p>
                         </Link>
                     ))}
@@ -263,10 +271,10 @@ export const Programms = () => {
                         onClick={() => setVisible((v) => v + PAGE_SIZE)}
                         className="rounded-full border border-border px-8 py-4 text-[13.5px] font-semibold tracking-[0.03em] text-foreground transition-colors duration-200 hover:border-accent-light hover:text-accent-light"
                     >
-                        Показать ещё
+                        {tCommon("showMore")}
                     </button>
                 </div>
             )}
         </section>
     )
-}
+};

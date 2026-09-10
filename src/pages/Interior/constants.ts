@@ -32,18 +32,27 @@ export const PHOTOS = [
 
 export const ROOMS = [
     {
-        name: "VIP-апартаменты",
+        name: { ru: "VIP-апартаменты", en: "VIP Apartments" },
         photo: "/interior/vip_room.avif",
-        bio: "Просторные приватные комнаты класса люкс с продуманным освещением и атмосферой полного уединения — для тех, кто ценит комфорт и приватность.",
+        bio: {
+            ru: "Просторные приватные комнаты класса люкс с продуманным освещением и атмосферой полного уединения — для тех, кто ценит комфорт и приватность.",
+            en: "Spacious, luxury-class private rooms with carefully designed lighting and an atmosphere of complete seclusion — for those who value comfort and privacy.",
+        },
     },
     {
-        name: "Джакузи",
+        name: { ru: "Джакузи", en: "Jacuzzi" },
         photo: "/interior/jacuzzi.avif",
-        bio: "Расслабляющая ванна перед сеансом массажа помогает снять напряжение и настроиться на отдых в компании нашей чаровницы.",
+        bio: {
+            ru: "Расслабляющая ванна перед сеансом массажа помогает снять напряжение и настроиться на отдых в компании нашей чаровницы.",
+            en: "A relaxing soak before your massage session helps release tension and settle into the mood for a session with one of our enchantresses.",
+        },
     },
     {
-        name: "Сауна",
+        name: { ru: "Сауна", en: "Sauna" },
         photo: "/interior/sauna.avif",
-        bio: "Тёплая сауна дополняет программу — прогрейтесь перед массажем или отдохните после него в приятной компании.",
+        bio: {
+            ru: "Тёплая сауна дополняет программу — прогрейтесь перед массажем или отдохните после него в приятной компании.",
+            en: "A warm sauna rounds out the program — warm up before your massage or unwind after it in pleasant company.",
+        },
     },
 ];

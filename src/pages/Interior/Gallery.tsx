@@ -1,11 +1,14 @@
 "use client"
 
 import { ArrowLeft, ArrowRight, Maximize2, X } from "lucide-react"
+import { useTranslations } from "next-intl"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import { PAGE_SIZE, PHOTOS } from "./constants"
 
 export const Gallery = () => {
+    const t = useTranslations("interiorPage")
+    const tCommon = useTranslations("common")
     const [visible, setVisible] = useState(PAGE_SIZE)
     const [lightbox, setLightbox] = useState<number | null>(null)
 
@@ -37,10 +40,10 @@ export const Gallery = () => {
                     className="text-[32px] leading-none font-medium text-foreground sm:text-[38px] md:text-[44px]"
                     style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                 >
-                    Фото <em className="text-accent-light">салона</em>
+                    {t("titleStart")} <em className="text-accent-light">{t("titleAccent")}</em>
                 </h2>
                 <span className="text-[12.5px] font-semibold tracking-[0.08em] text-foreground-faint uppercase">
-                    Всего: {PHOTOS.length}
+                    {t("total", { n: PHOTOS.length })}
                 </span>
             </div>
 
@@ -50,12 +53,12 @@ export const Gallery = () => {
                         key={photo}
                         type="button"
                         onClick={() => setLightbox(i)}
-                        aria-label={`Открыть фото ${i + 1}`}
+                        aria-label={t("openPhoto", { n: i + 1 })}
                         className="group relative aspect-square w-full cursor-zoom-in overflow-hidden rounded-sm"
                     >
                         <Image
                             src={photo}
-                            alt={`Интерьер салона, фото ${i + 1}`}
+                            alt={t("photoAlt", { n: i + 1 })}
                             fill
                             sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
                             className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
@@ -73,9 +76,9 @@ export const Gallery = () => {
                     <button
                         type="button"
                         onClick={() => setVisible((v) => v + PAGE_SIZE)}
-                        className="rounded-full border border-border px-8 py-4 text-[13.5px] font-semibold tracking-[0.03em] text-foreground transition-colors duration-200 hover:border-accent-light hover:text-accent-light"
+                        className="rounded-full cursor-pointer border border-border px-8 py-4 text-[13.5px] font-semibold tracking-[0.03em] text-foreground transition-colors duration-200 hover:border-accent-light hover:text-accent-light"
                     >
-                        Показать ещё
+                        {tCommon("showMore")}
                     </button>
                 </div>
             )}
@@ -90,8 +93,8 @@ export const Gallery = () => {
                     <button
                         type="button"
                         onClick={() => setLightbox(null)}
-                        aria-label="Закрыть"
-                        className="absolute top-4 right-4 z-10 flex size-10 items-center justify-center rounded-full border border-border bg-background/70 text-foreground-muted backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-foreground sm:top-6 sm:right-6"
+                        aria-label={tCommon("close")}
+                        className="absolute cursor-pointer top-4 right-4 z-10 flex size-10 items-center justify-center rounded-full border border-border bg-background/70 text-foreground-muted backdrop-blur-sm transition-colors hover:border-accent/40 hover:text-foreground sm:top-6 sm:right-6"
                     >
                         <X className="size-5" />
                     </button>
@@ -102,8 +105,8 @@ export const Gallery = () => {
                             e.stopPropagation()
                             prev()
                         }}
-                        aria-label="Предыдущее фото"
-                        className="absolute top-1/2 left-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-foreground/50 sm:left-6 sm:size-11"
+                        aria-label={tCommon("prevPhoto")}
+                        className="absolute cursor-pointer top-1/2 left-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-foreground/25 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-foreground/50 sm:left-6 sm:size-11"
                     >
                         <ArrowLeft className="size-4" />
                     </button>
@@ -113,8 +116,8 @@ export const Gallery = () => {
                             e.stopPropagation()
                             next()
                         }}
-                        aria-label="Следующее фото"
-                        className="absolute top-1/2 right-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-accent/60 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-accent sm:right-6 sm:size-11"
+                        aria-label={tCommon("nextPhoto")}
+                        className="absolute cursor-pointer top-1/2 right-3 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-accent/60 bg-background/40 text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-accent sm:right-6 sm:size-11"
                     >
                         <ArrowRight className="size-4" />
                     </button>
@@ -122,7 +125,7 @@ export const Gallery = () => {
                     <div className="animate-modal-in relative h-full max-h-[85vh] w-full max-w-4xl">
                         <Image
                             src={PHOTOS[lightbox]}
-                            alt={`Интерьер салона, фото ${lightbox + 1}`}
+                            alt={t("photoAlt", { n: lightbox + 1 })}
                             fill
                             sizes="90vw"
                             className="object-contain"

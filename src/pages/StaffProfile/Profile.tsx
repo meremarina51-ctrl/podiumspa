@@ -1,27 +1,34 @@
 "use client"
 
 import { Cake, Heart, Ruler, Weight } from "lucide-react"
+import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
 import { OrderModal } from "@/components/OrderModal"
 import { phone } from "@/components/constants"
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon"
+import { pick } from "@/lib/i18n-content"
 import type { StaffMember } from "@/lib/staff"
-import { WHATSAPP_HREF } from "@/pages/Home/constants"
 import { Gallery } from "./Gallery"
+import { WHATSAPP_HREF } from "@/lib/constants"
 
 interface IProps {
     member: StaffMember
 }
 
 export const Profile = ({ member }: IProps) => {
-    const [isOrderOpen, setOrderOpen] = useState(false)
+    const t = useTranslations("staffProfile");
+    const tCommon = useTranslations("common");
+    const locale = useLocale();
+    const name = pick(member.name, locale);
+
+    const [isOrderOpen, setOrderOpen] = useState(false);
 
     const stats = [
-        { label: "Возраст", value: member.age ? `${member.age} лет` : null, icon: Cake },
-        { label: "Рост", value: member.height ? `${member.height} см` : null, icon: Ruler },
-        { label: "Вес", value: member.weight ? `${member.weight} кг` : null, icon: Weight },
-        { label: "Грудь", value: member.bust || null, icon: Heart },
-    ].filter((stat): stat is { label: string; value: string; icon: typeof Cake } => Boolean(stat.value))
+        { label: t("age"), value: member.age ? t("ageValue", { n: member.age }) : null, icon: Cake },
+        { label: t("height"), value: member.height ? t("heightValue", { n: member.height }) : null, icon: Ruler },
+        { label: t("weight"), value: member.weight ? t("weightValue", { n: member.weight }) : null, icon: Weight },
+        { label: t("bust"), value: member.bust || null, icon: Heart },
+    ].filter((stat): stat is { label: string; value: string; icon: typeof Cake } => Boolean(stat.value));
 
     return (
         <section className="relative overflow-hidden">
@@ -30,17 +37,17 @@ export const Profile = ({ member }: IProps) => {
 
             <div className="relative mx-auto w-full max-w-340 px-6 py-10 md:px-14">
                 <div className="grid grid-cols-1 gap-10 lg:grid-cols-[440px_1fr]">
-                    <Gallery photos={member.photos} name={member.name} />
+                    <Gallery photos={member.photos} name={name} />
 
                     <div>
                         <span className="mb-3 block text-[11px] font-semibold tracking-[0.15em] text-accent-light uppercase">
-                            Анкета модели
+                            {t("eyebrow")}
                         </span>
                         <h1
                             className="text-[40px] leading-none font-medium text-foreground sm:text-[48px]"
                             style={{ fontFamily: "var(--font-cormorant), Arial, sans-serif" }}
                         >
-                            {member.name}
+                            {name}
                         </h1>
 
                         <div className="mt-7 grid grid-cols-2 gap-3">
@@ -63,9 +70,9 @@ export const Profile = ({ member }: IProps) => {
                         <button
                             type="button"
                             onClick={() => setOrderOpen(true)}
-                            className="mt-7 inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-dark"
+                            className="mt-7 cursor-pointer inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-accent-dark"
                         >
-                            Записаться
+                            {tCommon("bookCta")}
                         </button>
 
                         <div className="mt-5 flex items-center justify-between border-t border-border pt-5">
@@ -74,7 +81,7 @@ export const Profile = ({ member }: IProps) => {
                             </a>
                             <a
                                 href={WHATSAPP_HREF}
-                                aria-label="Написать в WhatsApp"
+                                aria-label={tCommon("writeWhatsapp")}
                                 className="flex size-8 items-center justify-center rounded-full bg-[#25D366]/15 transition-opacity duration-200 hover:opacity-80"
                             >
                                 <WhatsAppIcon className="size-4 text-[#25D366]" />
@@ -84,7 +91,7 @@ export const Profile = ({ member }: IProps) => {
                 </div>
             </div>
 
-            <OrderModal title={member.name} open={isOrderOpen} onClose={() => setOrderOpen(false)} />
+            <OrderModal title={name} open={isOrderOpen} onClose={() => setOrderOpen(false)} />
         </section>
     )
 };

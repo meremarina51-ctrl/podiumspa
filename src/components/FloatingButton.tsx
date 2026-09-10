@@ -1,12 +1,14 @@
 "use client"
 
 import { Phone, X } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useEffect, useRef, useState } from "react"
 import { TelegramIcon } from "@/components/icons/TelegramIcon"
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon"
-import { TELEGRAM_HREF, WHATSAPP_HREF } from "@/pages/Home/constants"
+import { TELEGRAM_HREF, WHATSAPP_HREF } from "@/lib/constants"
 
 export const FloatingButton = () => {
+    const t = useTranslations("floatingButton")
     const [isOpen, setOpen] = useState(false)
     const ref = useRef<HTMLDivElement>(null)
 
@@ -23,7 +25,7 @@ export const FloatingButton = () => {
 
         document.addEventListener("mousedown", onClickOutside)
         document.addEventListener("keydown", onKeyDown)
-        
+
         return () => {
             document.removeEventListener("mousedown", onClickOutside)
             document.removeEventListener("keydown", onKeyDown)
@@ -37,7 +39,7 @@ export const FloatingButton = () => {
                     href={WHATSAPP_HREF}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Написать в WhatsApp"
+                    aria-label={t("whatsapp")}
                     aria-hidden={!isOpen}
                     tabIndex={isOpen ? 0 : -1}
                     className={`flex size-13 items-center justify-center rounded-full border border-[#25D366]/30 bg-surface text-[#25D366] shadow-lg shadow-black/25 transition-all duration-200 ease-out hover:-translate-y-0.5 ${isOpen ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
@@ -49,7 +51,7 @@ export const FloatingButton = () => {
                     href={TELEGRAM_HREF}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Написать в Telegram"
+                    aria-label={t("telegram")}
                     aria-hidden={!isOpen}
                     tabIndex={isOpen ? 0 : -1}
                     className={`flex size-13 items-center justify-center rounded-full border border-[#29A9EA]/30 bg-surface text-[#29A9EA] shadow-lg shadow-black/25 transition-all duration-200 ease-out hover:-translate-y-0.5 ${isOpen ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0"
@@ -62,8 +64,8 @@ export const FloatingButton = () => {
             <button
                 type="button"
                 onClick={() => setOpen((v) => !v)}
-                aria-label={isOpen ? "Закрыть меню" : "Связаться с нами"}
-                className="flex size-14 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/30 transition-transform duration-200 hover:scale-105 active:scale-95"
+                aria-label={isOpen ? t("closeMenu") : t("openMenu")}
+                className="flex cursor-pointer size-14 items-center justify-center rounded-full bg-accent text-white shadow-lg shadow-accent/30 transition-transform duration-200 hover:scale-105 active:scale-95"
             >
                 {isOpen ? <X className="size-6" /> : <Phone className="size-6" />}
             </button>
