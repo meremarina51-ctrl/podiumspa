@@ -37,7 +37,7 @@ export const Hero = async () => {
                     </Link>
                 </div>
 
-                <div className="relative mx-auto w-full max-w-90 sm:max-w-120 lg:mx-0 lg:w-95 lg:max-w-none">
+                <div className="relative mx-auto w-full max-w-90 pb-14 sm:max-w-120 sm:pb-16 lg:mx-0 lg:w-95 lg:max-w-none">
                     <div className="relative aspect-4/5 w-full overflow-hidden rounded-sm">
                         <Image
                             src="/home/hero.avif"
@@ -50,37 +50,25 @@ export const Hero = async () => {
                         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(10,5,9,0.55)_0%,transparent_38%)]" />
                     </div>
 
-                    <div className="relative mt-4 overflow-hidden rounded-sm border border-border shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)]">
-                        <div className="relative h-30 w-full">
-                            <Image
-                                src="/home/banner/bg-300x213.png.avif"
-                                alt=""
-                                fill
-                                priority
-                                sizes="380px"
-                                className="object-cover"
-                            />
-                            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,5,9,0.35)_0%,rgba(10,5,9,0.85)_100%)]" />
-
-                            <div className="relative flex h-full items-center gap-3 px-5">
-                                <div className="flex h-7.5 w-7.5 shrink-0 items-center justify-center rounded-lg bg-accent-wash text-accent-light">
-                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                                        <path d="M4 4h16L12 13Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
-                                        <path d="M12 13v6M9 19h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                                    </svg>
-                                </div>
-                                <div>
-                                    <p className="text-[11.5px] leading-[1.4] text-foreground">
-                                        {t("giftTitle")}
-                                    </p>
-                                    <p className="mt-1 text-[11px] leading-[1.4] text-foreground-muted">
-                                        {t("giftSubtitle")}
-                                    </p>
-                                </div>
+                    <div className="absolute inset-x-3 bottom-0 overflow-hidden rounded-2xl border border-foreground/15 bg-background/55 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] backdrop-blur-md">
+                        <div className="flex items-center gap-3 px-5 pt-4 pb-3">
+                            <div className="flex h-7.5 w-7.5 shrink-0 items-center justify-center rounded-lg bg-accent-wash text-accent-light backdrop-blur-sm">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                                    <path d="M4 4h16L12 13Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+                                    <path d="M12 13v6M9 19h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                                </svg>
+                            </div>
+                            <div>
+                                <p className="text-[11.5px] leading-[1.4] text-foreground">
+                                    {t("giftTitle")}
+                                </p>
+                                <p className="mt-1 text-[11px] leading-[1.4] text-foreground-muted">
+                                    {t("giftSubtitle")}
+                                </p>
                             </div>
                         </div>
 
-                        <div className="bg-surface-2 p-3">
+                        <div className="border-t border-border p-3">
                             <Link
                                 href={ROUTES.CONTACTS}
                                 className="flex items-center justify-center rounded-full bg-accent px-5 py-2.5 text-[12px] font-semibold tracking-[0.03em] text-white transition-colors hover:bg-accent-dark"
