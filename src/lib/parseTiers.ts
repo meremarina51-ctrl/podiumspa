@@ -2,7 +2,7 @@ export const parseTiers = (price: string) =>
     price
         .split("\n")
         .map((part) => {
-            const match = part.match(/([\d\s]+)\s*₽\s*·\s*(\d+)\s*(?:мин|min)/)
+            const match = part.match(/([\d\s]+)\s*₽\s*·\s*(\d+)\s*(?:мин|min|分钟)/)
             if (!match) return null
             return { price: Number(match[1].replace(/\s/g, "")), duration: Number(match[2]) }
         })

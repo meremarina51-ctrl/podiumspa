@@ -56,7 +56,8 @@
     "languageSwitcher": {
         "selectLanguage": "Выбрать язык",
         "ru": "Русский",
-        "en": "English"
+        "en": "English",
+        "zh": "中文"
     },
     "orderModal": {
         "submittedTitle": "Заявка отправлена",

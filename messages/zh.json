@@ -1,0 +1,310 @@
+{
+    "metadata": {
+        "title": "Podium — 莫斯科私人情色按摩沙龙",
+        "description": "Podium 是位于莫斯科市中心的VIP级情色按摩沙龙，全天候营业。"
+    },
+    "common": {
+        "bookCta": "立即预约",
+        "orderCta": "预约",
+        "carouselBack": "上一个",
+        "carouselNext": "下一个",
+        "viewAll": "查看全部",
+        "viewAllPeople": "查看全部",
+        "showMore": "显示更多",
+        "filters": "筛选",
+        "apply": "应用",
+        "reset": "重置",
+        "resetFilters": "重置筛选",
+        "closeFilters": "关闭筛选",
+        "from": "从",
+        "to": "至",
+        "close": "关闭",
+        "openFullscreen": "全屏查看照片",
+        "prevPhoto": "上一张照片",
+        "nextPhoto": "下一张照片",
+        "photoNumber": "照片 {n}",
+        "whatsapp": "WhatsApp",
+        "telegram": "Telegram",
+        "email": "邮箱",
+        "writeWhatsapp": "在WhatsApp上留言",
+        "writeTelegram": "在Telegram上留言",
+        "disclaimer": "本沙龙不提供任何性服务！",
+        "bookingNoteShort": "预约制服务——请提前致电！"
+    },
+    "header": {
+        "openMenu": "打开菜单",
+        "closeMenu": "关闭菜单",
+        "menu": "菜单"
+    },
+    "footer": {
+        "menu": "菜单",
+        "vacancy": "招聘",
+        "ourPrograms": "我们的项目",
+        "contacts": "联系方式",
+        "telegramChannel": "我们的Telegram频道",
+        "telegramBlurb": "最新资讯与独家内容",
+        "subscribe": "订阅",
+        "acceptedPayments": "支持的支付方式",
+        "privacyPolicy": "隐私政策"
+    },
+    "floatingButton": {
+        "whatsapp": "在WhatsApp上留言",
+        "telegram": "在Telegram上留言",
+        "openMenu": "联系我们",
+        "closeMenu": "关闭菜单"
+    },
+    "languageSwitcher": {
+        "selectLanguage": "选择语言",
+        "ru": "Русский",
+        "en": "English",
+        "zh": "中文"
+    },
+    "orderModal": {
+        "submittedTitle": "申请已发送",
+        "submittedText": "我们的客服人员会尽快与您联系。",
+        "bookingNote": "预约制服务——请提前致电！",
+        "nameLabel": "您的姓名",
+        "namePlaceholder": "请输入您的姓名",
+        "phoneLabel": "电话号码",
+        "consentLabel": "点击“发送”即表示您同意隐私政策",
+        "submit": "发送"
+    },
+    "homeHero": {
+        "eyebrow": "私人情色按摩沙龙",
+        "titleStart": "Podium — 尊享",
+        "titleAccent": "VIP级情色按摩沙龙",
+        "giftTitle": "男士情色按摩礼品卡",
+        "giftSubtitle": "给他一个惊喜！",
+        "giftCta": "立即获取"
+    },
+    "homeAbout": {
+        "eyebrow": "关于沙龙",
+        "titleStart": "Podium情色按摩沙龙——",
+        "titleAccent": "莫斯科最佳放松之地",
+        "intro": "享受美好时光无需等待合适的时机——现在就来Podium吧！男士们都喜爱与我们迷人的按摩师相伴，原因显而易见。",
+        "outro": "不要拒绝您期待已久的愉悦体验！我们的按摩师将为您带来愉快的陪伴。",
+        "videoAria": "视频 {n}"
+    },
+    "homeAdvantages": {
+        "eyebrow": "为什么选择我们",
+        "titleStart": "我们的",
+        "titleAccent": "优势"
+    },
+    "homeContacts": {
+        "title": "联系方式",
+        "address": "地址",
+        "hours": "营业时间",
+        "acceptedPayments": "支持的支付方式",
+        "bookingNote": "预约制服务——请提前致电！",
+        "allContacts": "全部联系方式"
+    },
+    "homeInterior": {
+        "titleStart": "沙龙",
+        "titleAccent": "内部环境",
+        "photoAlt": "沙龙内部环境，照片 {n}"
+    },
+    "homeProgramms": {
+        "titleStart": "热门",
+        "titleAccent": "项目",
+        "viewAll": "全部项目",
+        "showMore": "查看更多"
+    },
+    "homeQuiz": {
+        "introTitle": "拿不定主意？",
+        "introTitleStart": "拿不",
+        "introTitleAccent": "定主意？",
+        "introText": "提交申请，让我们帮您挑选合适的按摩师，还可获赠30分钟按摩！",
+        "start": "开始匹配",
+        "questionOf": "问题 {step}/{total}",
+        "back": "返回",
+        "nextStep": "下一步",
+        "contactTitle": "填写您的联系方式",
+        "contactText": "我们的客服人员会为您推荐最合适的人选并与您联系！",
+        "namePlaceholder": "您的姓名",
+        "phonePlaceholder": "+7 (___) ___-__-__",
+        "consentLabel": "我同意个人数据处理及隐私政策",
+        "submit": "发送",
+        "successTitle": "申请已发送",
+        "successText": "我们的客服人员会尽快为您推荐最合适的人选并与您联系。"
+    },
+    "homeSpecialists": {
+        "titleStart": "沙龙",
+        "titleAccent": "女孩",
+        "viewAll": "查看全部",
+        "stats": "身高：{height} · 体重：{weight} · 胸围：{bust}",
+        "showMore": "查看更多"
+    },
+    "homeTelegramBanner": {
+        "title": "第一时间了解我们的新面孔与优惠活动",
+        "text": "订阅我们的Telegram频道，舒适地享受放松时光！",
+        "cta": "订阅"
+    },
+    "staffPage": {
+        "titleStart": "沙龙",
+        "titleAccent": "女孩",
+        "total": "共 {n} 位",
+        "age": "年龄（岁）",
+        "height": "身高（厘米）",
+        "weight": "体重（公斤）",
+        "bust": "胸围",
+        "silicone": "硅胶",
+        "hasVideo": "含视频",
+        "empty": "没有符合所选条件的女孩。",
+        "cardHeight": "身高",
+        "cardWeight": "体重",
+        "cardBust": "胸围"
+    },
+    "staffAbout": {
+        "titleStart": "来自",
+        "titleAccent": "PODIUM",
+        "titleEnd": "情色按摩沙龙的按摩师",
+        "paragraph1": "我们的按摩师是我们的骄傲——这一点客人们都能证明！试想与一位或几位美女共度时光……随后她们再为您带来专业的按摩服务。听起来不错吧？",
+        "paragraph2": "Podium情色按摩沙龙随时乐意帮您挑选按摩师！告诉客服您的偏好，她会为您推荐最合适的人选！",
+        "paragraph3": "如果您认为按摩师的多样选择无关紧要，那就让我们来改变您的想法！试想您预约了一场由“女王”主导的BDSM放松疗程（没错，我们也有这项服务），结果来的却是一位声音细软、娇小可爱的女孩。是不是有点不搭？",
+        "paragraph4": "这正是我们的按摩师风格各异的原因！苗条与丰满，高挑与娇小，结实与柔美，应有尽有。还有一个有趣的事实——我们的女孩中有的是硅胶胸，也有的是天然胸，方便男士们按这一标准挑选心仪的伙伴！",
+        "paragraph5": "对于欲望强烈的客人，我们的情色按摩沙龙还提供令人兴奋的双人组合——许多女孩搭档默契十足！一切全凭您的心意！"
+    },
+    "staffProfile": {
+        "eyebrow": "女孩档案",
+        "age": "年龄",
+        "height": "身高",
+        "weight": "体重",
+        "bust": "胸围",
+        "ageValue": "{n} 岁",
+        "heightValue": "{n} 厘米",
+        "weightValue": "{n} 公斤",
+        "photoAlt": "{name}，照片 {n}"
+    },
+    "relatedStaff": {
+        "titleStart": "更多",
+        "titleAccent": "女孩"
+    },
+    "recommendedPrograms": {
+        "titleStart": "推荐",
+        "titleAccent": "项目",
+        "viewAll": "全部项目"
+    },
+    "programsPage": {
+        "title": "项目",
+        "price": "价格（₽）",
+        "duration": "时长（分钟）",
+        "empty": "没有符合所选条件的项目。"
+    },
+    "programsCategories": {
+        "title": "分类"
+    },
+    "programsServices": {
+        "titleStart": "您可能还会",
+        "titleAccent": "喜欢",
+        "prevAria": "上一个服务",
+        "nextAria": "下一个服务"
+    },
+    "programsBanner": {
+        "titleStart": "来自",
+        "titleAccent": "Podium Spa的礼品卡",
+        "text": "在线购买任意金额的礼品卡，支持送货上门",
+        "cta": "了解更多"
+    },
+    "programsAbout": {
+        "titleStart": "来自",
+        "titleAccent": "PODIUM",
+        "titleEnd": "情色按摩沙龙的项目",
+        "paragraph1": "Podium情色沙龙是您实现所有隐秘愿望的地方。尽情释放您的想象力，我们的女孩会用精湛的放松技巧为您带来愉悦。",
+        "paragraph2": "我们的目标是为您安排一段休闲时光，让您感受到极致的放松与难忘的体验。",
+        "paragraph3": "Podium情色按摩沙龙始终重视客人的意愿。如果您在项目目录中没有找到合适的服务，我们的客服人员可以根据您的个人喜好为您安排定制疗程。",
+        "paragraph4": "在这里，您可以坦诚分享您最私密的愿望。我们尊重客人的隐私，绝不会向第三方透露您的到访信息。",
+        "paragraph5": "Podium还有一个有趣的亮点——我们不仅服务男士，也为女士和情侣设计了专属项目。"
+    },
+    "programProfile": {
+        "eyebrow": "项目",
+        "price": "价格",
+        "duration": "时长"
+    },
+    "relatedPrograms": {
+        "titleStart": "更多",
+        "titleAccent": "项目"
+    },
+    "recommendedStaff": {
+        "titleStart": "推荐",
+        "titleAccent": "女孩",
+        "viewAll": "查看全部"
+    },
+    "promoPage": {
+        "title": "优惠活动",
+        "subtitle": "为您呈现独家优惠",
+        "titleStart": "我们的",
+        "titleAccent": "优惠活动",
+        "allTitleStart": "全部",
+        "allTitleAccent": "优惠活动",
+        "active": "进行中",
+        "expired": "活动已结束",
+        "more": "了解更多",
+        "prevSlide": "上一张",
+        "nextSlide": "下一张",
+        "slideNumber": "第 {n} 张"
+    },
+    "promoAbout": {
+        "titleStart": "来自",
+        "titleAccent": "PODIUM",
+        "titleEnd": "情色按摩沙龙的优惠活动",
+        "paragraph1": "没有优惠活动，怎能称得上是好沙龙？Podium情色按摩沙龙推出多项优惠活动，让您既能省钱又能获得有趣的礼品。这样一来，您的到访将更加愉快！",
+        "paragraph2": "如果您想以实惠的价格享受高端休闲体验，Podium正是实现这一愿望的绝佳选择！快来享受专业的按摩服务吧！",
+        "paragraph3": "许多男士认为优质的休闲体验并非人人都能享受。我们的情色按摩沙龙希望打破这一刻板印象，证明只要找对地方，人人都能享受美好的休闲时光。欢迎亲自到访，一探究竟！"
+    },
+    "promoProfile": {
+        "publishedOn": "发布日期：{date}"
+    },
+    "relatedPromos": {
+        "titleStart": "更多",
+        "titleAccent": "优惠活动",
+        "expiredShort": "已结束"
+    },
+    "blogPage": {
+        "readMore": "阅读全文",
+        "empty": "该分类下暂无文章。",
+        "categories": "分类",
+        "allCategories": "全部"
+    },
+    "blogPopular": {
+        "titleStart": "热门",
+        "titleAccent": "文章"
+    },
+    "blogAbout": {
+        "titleStart": "来自",
+        "titleAccent": "PODIUM",
+        "titleEnd": "沙龙的情色按摩文章",
+        "paragraph1": "如果您想揭开神秘的面纱，进一步了解情色世界，我们的文章正是绝佳的起点！从经典放松技巧到最大胆、最露骨的项目，这里应有尽有。",
+        "paragraph2": "实现梦想的第一步，是下定决心迈出勇敢的一步。对有些人来说，那是一次跳伞；而对另一些人来说，则是一次情色按摩沙龙之旅。在我们的文章中，我们探讨了男士们对这类休闲方式最常见的顾虑，以及如何克服它们。",
+        "paragraph3": "我们也不回避情色休闲带来的益处。当然，这不能称之为治疗，但确实能在某些方面有所帮助。而要知道在Podium的一次疗程能否帮您化解内心的困扰，唯一的办法就是——亲自前来体验！"
+    },
+    "relatedPosts": {
+        "titleStart": "更多",
+        "titleAccent": "文章"
+    },
+    "contactsPage": {
+        "title": "联系方式",
+        "subtitle": "通过您方便的方式联系我们——我们随时恭候",
+        "address": "地址",
+        "hours": "营业时间",
+        "acceptedPayments": "支持的支付方式",
+        "bookingNote": "预约制服务——请提前致电预约合适的时间！"
+    },
+    "interiorPage": {
+        "title": "内部环境",
+        "subtitle": "位于莫斯科市中心的VIP级套房",
+        "titleStart": "沙龙",
+        "titleAccent": "实景照片",
+        "total": "共 {n} 张",
+        "photoAlt": "沙龙内部环境，照片 {n}",
+        "openPhoto": "打开照片 {n}"
+    },
+    "privacyPage": {
+        "metaTitle": "隐私政策 — Podium",
+        "titleStart": "隐私",
+        "titleAccent": "政策",
+        "backHome": "返回首页"
+    },
+    "vacancyPage": {
+        "title": "招聘"
+    }
+}
