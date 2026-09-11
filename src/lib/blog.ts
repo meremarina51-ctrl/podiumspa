@@ -22,7 +22,7 @@ export const BLOG_POSTS = [
             en: "Erotic massage isn't just a relaxing treatment — it's a way to experience something new, relieve stress and step away from your problems for a while. Podium invites men who want to discover a new format of relaxation!\n\nFirst, it's quality rest without compromise — the salon's atmosphere, interior and service are all built so you fully relax from the first minutes of your visit.\n\nSecond, it's new sensations — even experienced guests find something in our programs they haven't tried before.\n\nThird, it's self-care — a regular massage releases the muscular and emotional tension that builds up over the week.\n\nFourth, it's privacy — the salon guarantees complete confidentiality for every visit.\n\nAnd finally, it's simply pleasure — no excuses or explanations needed. Sometimes that's more than enough.",
         },
         date: "2024-09-05",
-        photo: "/blog/fonstola.ru_408202.jpg.png.webp",
+        photo: "/blog/fonstola.ru_408202.jpg.png.avif",
     },
     {
         title: {
@@ -39,7 +39,7 @@ export const BLOG_POSTS = [
             en: "Many men think of quality erotic massage as a luxury reserved for special occasions. In reality, good service can easily become part of your regular self-care routine.\n\nPodium offers programs for every budget — from a compact one-hour session to an extended VIP format. That lets you pick exactly what suits you, without paying for extras you don't need.\n\nPrice doesn't affect the quality of the massage itself — the difference mostly comes down to session length and add-ons like a jacuzzi or sauna.\n\nTry it — and see for yourself that quality relaxation can be a regular habit, not just a one-off treat.",
         },
         date: "2022-08-01",
-        photo: "/blog/women.webp",
+        photo: "/blog/women.avif",
         popular: true,
     },
     {
@@ -57,7 +57,7 @@ export const BLOG_POSTS = [
             en: "Lingam massage is one of the oldest tantric practices, surrounded by plenty of myths. We break down what it actually is and how it differs from other techniques.\n\nThe practice is built on mindful, unhurried contact — it teaches a man to notice his own sensations and gradually extend pleasure, rather than rushing toward a result.\n\nAn important part of the session is breathing technique and relaxing the whole body, not just one area: the masseuse starts with a classic massage and only then moves into tantric elements.\n\nIt's one of those practices worth trying at least once — it opens up a completely new way of experiencing your own body.",
         },
         date: "2022-08-01",
-        photo: "/blog/hochu-eshhe-m-1.png.webp",
+        photo: "/blog/hochu-eshhe-m-1.png.avif",
         popular: true,
     },
     {
@@ -75,7 +75,7 @@ export const BLOG_POSTS = [
             en: "Erotic massage isn't just a story about men. More and more women are discovering this format of relaxation, and we explain why it's worth trying.\n\nA woman's body often needs a different approach: more attention to detail, a gentler pace, and careful work on the tension zones that build up from stress and routine.\n\nOur programs for women at Podium are built on exactly this principle — combining relaxing techniques with delicate, sensual elements, without rushing or pressure.\n\nIt's a space where you can forget your roles and responsibilities for a couple of hours — and just be yourself.",
         },
         date: "2022-08-01",
-        photo: "/blog/tmb_105899_2697.jpg.webp",
+        photo: "/blog/tmb_105899_2697.jpg.avif",
         popular: true,
     },
 ];
