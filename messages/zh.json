@@ -69,13 +69,32 @@
         "consentLabel": "点击“发送”即表示您同意隐私政策",
         "submit": "发送"
     },
-    "homeHero": {
-        "eyebrow": "私人情色按摩沙龙",
-        "titleStart": "Podium — 尊享",
-        "titleAccent": "VIP级情色按摩沙龙",
-        "giftTitle": "男士情色按摩礼品卡",
-        "giftSubtitle": "给他一个惊喜！",
-        "giftCta": "立即获取"
+    "homeGlassHero": {
+        "loading": "加载中…",
+        "webglError": "您的浏览器不支持此3D场景",
+        "sliderControls": "幻灯片控制",
+        "prevSlide": "上一张",
+        "nextSlide": "下一张",
+        "slideNumber": "第 {n} 张",
+        "pauseSlider": "暂停",
+        "resumeSlider": "继续",
+        "slides": {
+            "welcome": {
+                "title": "Podium — 尊享VIP级情色按摩沙龙",
+                "body": "私密氛围，坐落于莫斯科市中心。全天候营业，让您随时尽享其中。",
+                "note": "私人情色按摩沙龙"
+            },
+            "vipMassage": {
+                "title": "按摩师的精湛技艺",
+                "body": "温柔、感性，专注于每一个细节——我们会为您挑选最合适的项目，带来您期待的感受。",
+                "note": ""
+            },
+            "giftCard": {
+                "title": "男士情色按摩礼品卡",
+                "body": "给他一个惊喜！",
+                "note": ""
+            }
+        }
     },
     "homeAbout": {
         "eyebrow": "关于沙龙",

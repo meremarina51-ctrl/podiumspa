@@ -69,13 +69,32 @@
         "consentLabel": "By clicking \"Send\" you agree to the privacy policy",
         "submit": "Send"
     },
-    "homeHero": {
-        "eyebrow": "Private erotic massage salon",
-        "titleStart": "Podium — salon of erotic massage of",
-        "titleAccent": "VIP-class",
-        "giftTitle": "Gift certificates for men for an erotic massage",
-        "giftSubtitle": "Give him an incredible surprise!",
-        "giftCta": "Get one"
+    "homeGlassHero": {
+        "loading": "Loading…",
+        "webglError": "3D scene isn't available in this browser",
+        "sliderControls": "Slide controls",
+        "prevSlide": "Previous slide",
+        "nextSlide": "Next slide",
+        "slideNumber": "Slide {n}",
+        "pauseSlider": "Pause",
+        "resumeSlider": "Resume",
+        "slides": {
+            "welcome": {
+                "title": "Podium — salon of erotic massage of VIP-class",
+                "body": "A private atmosphere in the very center of Moscow. Open around the clock, so you can allow yourself this whenever you like.",
+                "note": "Private erotic massage salon"
+            },
+            "vipMassage": {
+                "title": "The skill of our specialists",
+                "body": "Softness, sensuality and attention to every detail — we'll pick a program that brings exactly the sensations you're after.",
+                "note": ""
+            },
+            "giftCard": {
+                "title": "Gift certificates for men for an erotic massage",
+                "body": "Give him an incredible surprise!",
+                "note": ""
+            }
+        }
     },
     "homeAbout": {
         "eyebrow": "About the salon",

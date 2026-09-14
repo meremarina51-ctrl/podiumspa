@@ -1,0 +1,254 @@
+.glass-hero {
+  position: relative;
+  width: 100%;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-jost), Arial, sans-serif;
+}
+
+.glass-hero-track {
+  height: 100svh;
+  position: relative;
+  max-width: 100%;
+}
+
+.glass-hero-stage {
+  position: relative;
+  top: 0;
+  height: 100svh;
+  min-height: 280px;
+  isolation: isolate;
+  overflow: hidden;
+  max-width: 100%;
+  background: var(--background);
+}
+
+.glass-hero-scene {
+  position: absolute;
+  inset: 0;
+  touch-action: pan-y;
+}
+
+.glass-hero-scene canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+}
+
+.glass-hero-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  padding: 30px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  background: rgba(10, 5, 9, 0.33);
+  text-shadow: 0 2px 20px #000;
+  z-index: 2;
+}
+
+.glass-hero-copy {
+  position: absolute;
+  left: 36px;
+  bottom: 48px;
+  z-index: 3;
+  width: min(420px, calc(100% - 72px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.glass-hero-copy-card {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  right: auto;
+  width: 100%;
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.65),
+    0 4px 16px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+.glass-hero-copy-card:not(.is-active) {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  visibility: hidden;
+}
+
+.glass-hero-copy-card.is-active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  visibility: visible;
+}
+
+.glass-hero-copy-card h2 {
+  margin: 0 0 8px;
+  font-family: var(--font-cormorant), Arial, sans-serif;
+  font-size: clamp(1.625rem, 1.1rem + 1.6vw, 2.375rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.12;
+  color: #fff;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.7),
+    0 3px 14px rgba(0, 0, 0, 0.5);
+}
+
+.glass-hero-copy-card p {
+  margin: 0;
+  font-family: var(--font-jost), Arial, sans-serif;
+  font-size: clamp(16.5px, 1.65vw, 18.7px);
+  font-weight: 400;
+  line-height: 1.32;
+  color: #fff;
+  max-width: 38ch;
+  text-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.7),
+    0 3px 12px rgba(0, 0, 0, 0.45);
+}
+
+.glass-hero-note {
+  margin-top: 8px !important;
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+.glass-hero-footer {
+  position: relative;
+  inset: auto;
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 18px;
+  opacity: 0;
+  transition: opacity 1.3s;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.glass-hero-footer.is-visible {
+  opacity: 1;
+}
+
+.glass-hero-controls {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 8px;
+  border: 1px solid rgba(245, 233, 240, 0.16);
+  border-radius: 99px;
+  background: rgba(10, 5, 9, 0.4);
+  backdrop-filter: blur(20px);
+  pointer-events: auto;
+}
+
+.glass-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--foreground);
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.glass-hero-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  opacity: 1;
+}
+
+.glass-hero-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.glass-hero-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.glass-hero-dot {
+  padding: 0;
+  width: 25px;
+  height: 30px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.glass-hero-dot span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: rgba(245, 233, 240, 0.29);
+  transition: background 0.6s, width 0.6s;
+}
+
+.glass-hero-dot.is-active span {
+  background: var(--accent-light);
+}
+
+.glass-hero-count {
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  padding: 0 5px;
+  color: var(--foreground);
+}
+
+.glass-hero-count > span {
+  color: rgba(245, 233, 240, 0.44);
+}
+
+.glass-hero-divider {
+  width: 1px;
+  height: 13px;
+  background: rgba(245, 233, 240, 0.16);
+}
+
+@media (max-width: 640px) {
+  /* Align with FloatingButton (`fixed … bottom-5` = 1.25rem) — copy+controls ride that baseline */
+  .glass-hero-copy {
+    left: 16px;
+    bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+    /* leave room for the phone FAB on the right */
+    width: min(360px, calc(100% - 16px - 5.5rem));
+  }
+
+  .glass-hero-copy-card h2 {
+    font-size: clamp(1.45rem, 5.2vw, 1.9rem);
+  }
+
+  .glass-hero-copy-card p {
+    font-size: 15px;
+    max-width: none;
+  }
+
+  .glass-hero-footer {
+    margin-top: 12px;
+  }
+
+  .glass-hero-controls {
+    gap: 5px;
+    padding: 3px 6px;
+  }
+
+  .glass-hero-btn {
+    width: 32px;
+    height: 32px;
+  }
+}

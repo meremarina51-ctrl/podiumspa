@@ -13,7 +13,7 @@ const navLinkClass = (active: boolean) =>
     `text-[13.5px] font-medium transition-colors duration-200 ease-out ${active ? "text-accent-light" : "text-foreground/62 hover:text-accent-light"
     }`;
 
-export const Header = () => {
+export const Header = ({ overlay = false }: { overlay?: boolean }) => {
     const pathname = usePathname()
     const locale = useLocale()
     const t = useTranslations("header")
@@ -32,7 +32,7 @@ export const Header = () => {
 
     return (
         <>
-            <header className="sticky top-0 z-50 flex w-full flex-col bg-background/95 backdrop-blur-sm">
+            <header className={`${overlay ? "fixed" : "sticky"} top-0 z-50 flex w-full flex-col bg-background/95 backdrop-blur-sm`}>
                 <div className="border-b border-border bg-surface-2 max-lg:hidden">
                     <div className="mx-auto flex h-9.5 w-full max-w-340 items-center justify-between px-14 text-xs text-foreground-faint">
                         <span>{hours.map((h) => pick(h, locale)).join(", ")}</span>
