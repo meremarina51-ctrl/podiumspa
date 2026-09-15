@@ -45,7 +45,7 @@ export const LanguageSwitcher = () => {
                 onClick={() => setOpen((v) => !v)}
                 aria-label={t("selectLanguage")}
                 aria-expanded={isOpen}
-                className="flex cursor-pointer items-center gap-1.5 rounded-full border border-foreground/15 px-3 py-1.5 text-[12.5px] font-semibold text-foreground transition-colors duration-200 hover:border-foreground/30"
+                className="flex cursor-pointer items-center gap-1.5 rounded-full border border-foreground/15 bg-surface/60 px-3 py-1.5 text-[12.5px] font-semibold text-foreground backdrop-blur-sm transition-colors duration-200 hover:border-foreground/30"
             >
                 {locale.toUpperCase()}
                 <ChevronDown

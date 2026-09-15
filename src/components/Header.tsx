@@ -2,16 +2,18 @@
 
 import { Menu, X } from "lucide-react"
 import { useLocale, useTranslations } from "next-intl"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react"
 import { Link, usePathname } from "@/i18n/navigation"
-import { address, ALL_NAV_ITEMS, hours, LEFT_NAV_ITEMS, phone, RIGHT_NAV_ITEMS } from "@/components/constants"
+import { address, ALL_NAV_ITEMS, phone } from "@/components/constants"
 import { LanguageSwitcher } from "@/components/LanguageSwitcher"
+import { LiquidGlassTweakPanel } from "@/components/LiquidGlassTweakPanel"
+import type { LiquidGlassNavHandle, LiquidGlassTweaks } from "@/lib/liquid-glass/engine"
+import { mountLiquidGlassNav } from "@/lib/liquid-glass/engine"
+import { PODIUM_GLASS_DEFAULTS, PODIUM_GLASS_HOVER, PODIUM_GLASS_HOVER_KEYS } from "@/lib/liquid-glass/presets"
+import { loadGlassTweaks, saveGlassTweaks } from "@/lib/liquid-glass/tweaks-storage"
 import { pick } from "@/lib/i18n-content"
 import { ROUTES } from "@/lib/routes"
-
-const navLinkClass = (active: boolean) =>
-    `text-[13.5px] font-medium transition-colors duration-200 ease-out ${active ? "text-accent-light" : "text-foreground/62 hover:text-accent-light"
-    }`;
+import "./header-nav.css"
 
 export const Header = ({ overlay = false }: { overlay?: boolean }) => {
     const pathname = usePathname()
@@ -19,6 +21,18 @@ export const Header = ({ overlay = false }: { overlay?: boolean }) => {
     const t = useTranslations("header")
     const tCommon = useTranslations("common")
     const [isOpen, setOpen] = useState(false)
+    const [isWide, setIsWide] = useState(false)
+    const [glassOk, setGlassOk] = useState(true)
+    const [panelOpen, setPanelOpen] = useState(false)
+    const [glassTweaks, setGlassTweaks] = useState<LiquidGlassTweaks>(() => loadGlassTweaks(PODIUM_GLASS_DEFAULTS))
+
+    const stageRef = useRef<HTMLElement | null>(null)
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const linkRefs = useRef<(HTMLAnchorElement | null)[]>([])
+    const engineRef = useRef<LiquidGlassNavHandle | null>(null)
+
+    const activeIndex = Math.max(0, ALL_NAV_ITEMS.findIndex((item) => item.href === pathname))
+    const labels = ALL_NAV_ITEMS.map((item) => pick(item.name, locale))
 
     useEffect(() => {
         if (!isOpen) return
@@ -30,73 +44,176 @@ export const Header = ({ overlay = false }: { overlay?: boolean }) => {
         }
     }, [isOpen])
 
+    useEffect(() => {
+        const mq = window.matchMedia("(min-width: 1024px)")
+        const sync = () => setIsWide(mq.matches)
+        sync()
+        mq.addEventListener("change", sync)
+        return () => mq.removeEventListener("change", sync)
+    }, [])
+
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => {
+            const target = e.target as HTMLElement | null
+            if (target?.tagName === "INPUT" || target?.tagName === "TEXTAREA" || target?.isContentEditable) return
+            if (e.key === "2" || e.code === "Digit2") {
+                e.preventDefault()
+                setPanelOpen((v) => !v)
+            }
+            if (e.key === "Escape") setPanelOpen(false)
+        }
+        window.addEventListener("keydown", onKey)
+        return () => window.removeEventListener("keydown", onKey)
+    }, [])
+
+    useEffect(() => {
+        if (!isWide || !glassOk) return
+        const stage = stageRef.current
+        const canvas = canvasRef.current
+        if (!stage || !canvas) return
+
+        let handle: LiquidGlassNavHandle | null = null
+        try {
+            handle = mountLiquidGlassNav({
+                canvas,
+                stage,
+                getButtons: () => linkRefs.current.filter(Boolean) as HTMLElement[],
+                initialActive: activeIndex,
+                orientation: "horizontal",
+                domLabels: false,
+                itemLens: true,
+                hoverTweaks: PODIUM_GLASS_HOVER,
+                hoverBlendKeys: PODIUM_GLASS_HOVER_KEYS,
+                onContextLost: () => {
+                    handle?.destroy()
+                    handle = null
+                    engineRef.current = null
+                    setGlassOk(false)
+                },
+            })
+            handle.setLabels(labels)
+            handle.setTweaks(glassTweaks)
+            engineRef.current = handle
+        } catch {
+            engineRef.current = null
+            // Imperative result of an external system (WebGL) failing to initialize —
+            // a legitimate setState-in-effect, not derivable during render.
+            // eslint-disable-next-line react-hooks/set-state-in-effect
+            setGlassOk(false)
+        }
+
+        return () => {
+            handle?.destroy()
+            engineRef.current = null
+        }
+        // Mount once per isWide/glassOk flip — pathname/locale/tweaks pushed via the effects below.
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isWide, glassOk])
+
+    useEffect(() => {
+        engineRef.current?.setActive(activeIndex)
+        engineRef.current?.setLabels(labels)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [pathname, locale])
+
+    useEffect(() => {
+        engineRef.current?.setTweaks(glassTweaks)
+    }, [glassTweaks])
+
+    const onGlassChange = useCallback((partial: Partial<LiquidGlassTweaks>) => {
+        setGlassTweaks((prev) => {
+            const next = { ...prev, ...partial }
+            saveGlassTweaks(next)
+            return next
+        })
+    }, [])
+
+    const onGlassReset = useCallback(() => {
+        setGlassTweaks({ ...PODIUM_GLASS_DEFAULTS })
+        saveGlassTweaks(PODIUM_GLASS_DEFAULTS)
+    }, [])
+
+    const onGlassExport = useCallback(() => {
+        const blob = new Blob([JSON.stringify(glassTweaks, null, 2)], { type: "application/json" })
+        const url = URL.createObjectURL(blob)
+        const a = document.createElement("a")
+        a.href = url
+        a.download = "podium-nav-glass-tweaks.json"
+        a.click()
+        URL.revokeObjectURL(url)
+    }, [glassTweaks])
+
+    const glassPad = Math.ceil(Math.max(glassTweaks.lensDiameter, glassTweaks.lensDiameter * glassTweaks.lensSquashY) * 0.5 + 28)
+
+    const pill = (
+        <nav
+            ref={(el) => { if (!isWide || !glassOk) stageRef.current = el }}
+            className={`podium-nav-pill${isWide && glassOk ? " is-glass" : ""}`}
+            aria-label="Main"
+        >
+            {ALL_NAV_ITEMS.map((item, i) => (
+                <Link
+                    key={item.href}
+                    href={item.href}
+                    ref={(el) => { linkRefs.current[i] = el }}
+                    className={`podium-nav-link${i === activeIndex ? " is-active" : ""}`}
+                    aria-current={i === activeIndex ? "page" : undefined}
+                >
+                    {pick(item.name, locale)}
+                </Link>
+            ))}
+        </nav>
+    )
+
     return (
         <>
-            <header className={`${overlay ? "fixed" : "sticky"} top-0 z-50 flex w-full flex-col bg-background/95 backdrop-blur-sm`}>
-                <div className="border-b border-border bg-surface-2 max-lg:hidden">
-                    <div className="mx-auto flex h-9.5 w-full max-w-340 items-center justify-between px-14 text-xs text-foreground-faint">
-                        <span>{hours.map((h) => pick(h, locale)).join(", ")}</span>
-                        <span className="flex items-center gap-2">
-                            {pick(address, locale)}
-                            <span className="inline-block h-1 w-1 rounded-full bg-foreground-faint" />
-                            {phone}
-                        </span>
-                    </div>
-                </div>
+            <div className="podium-nav">
+                <Link href={ROUTES.HOME} className="podium-nav-logo group">
+                    <span
+                        className="h-3 w-3 shrink-0 rotate-45 transition-transform duration-300 ease-out group-hover:scale-125 group-hover:rotate-225"
+                        style={{ background: "linear-gradient(135deg, var(--accent-light), var(--accent))" }}
+                    />
+                    <span className="text-[22px] font-bold tracking-[0.07em] text-foreground transition-colors duration-200 ease-out group-hover:text-accent-light">
+                        PODIUM
+                    </span>
+                </Link>
 
-                <div className="border-b border-border">
-                    <div className="mx-auto grid h-18 w-full max-w-340 grid-cols-[1fr_auto_1fr] items-center gap-6 px-6 md:h-26 md:px-14">
-                        <nav className="col-start-1 hidden items-center gap-7.5 lg:flex">
-                            {LEFT_NAV_ITEMS.map((item) => (
-                                <Link key={item.href} href={item.href} className={navLinkClass(pathname === item.href)}>
-                                    {pick(item.name, locale)}
-                                </Link>
-                            ))}
-                        </nav>
-
-                        <Link href={ROUTES.HOME} className="group col-start-2 flex items-center gap-2.5 whitespace-nowrap justify-self-start lg:justify-self-auto">
-                            <span
-                                className="h-3 w-3 shrink-0 rotate-45 transition-transform duration-300 ease-out group-hover:scale-125 group-hover:rotate-225"
-                                style={{ background: "linear-gradient(135deg, var(--accent-light), var(--accent))" }}
-                            />
-                            <span className="text-[24px] font-bold tracking-[0.07em] text-foreground transition-colors duration-200 ease-out group-hover:text-accent-light">
-                                PODIUM
-                            </span>
-                        </Link>
-
-                        <div className="col-start-3 flex items-center justify-end gap-7.5">
-                            <nav className="hidden items-center gap-7.5 lg:flex">
-                                {RIGHT_NAV_ITEMS.map((item) => (
-                                    <Link key={item.href} href={item.href} className={navLinkClass(pathname === item.href)}>
-                                        {pick(item.name, locale)}
-                                    </Link>
-                                ))}
-                            </nav>
-
-                            <div className="hidden lg:block">
-                                <LanguageSwitcher />
-                            </div>
-
-                            <Link
-                                href={ROUTES.CONTACTS}
-                                className="hidden shrink-0 rounded-full border px-6 py-2.5 text-[13.5px] font-semibold tracking-[0.03em] text-foreground transition-colors hover:bg-accent-wash sm:inline-flex"
-                                style={{ borderColor: "rgba(214,38,111,0.5)" }}
-                            >
-                                {tCommon("bookCta")}
-                            </Link>
-
-                            <button
-                                type="button"
-                                onClick={() => setOpen(true)}
-                                aria-label={t("openMenu")}
-                                className="flex cursor-pointer h-9 w-9 shrink-0 items-center justify-center rounded-full border border-foreground/15 text-foreground transition-colors duration-200 hover:border-foreground/30 lg:hidden"
-                            >
-                                <Menu className="size-5" />
-                            </button>
+                <div className="hidden lg:block">
+                    {isWide && glassOk ? (
+                        <div
+                            ref={(el) => { stageRef.current = el }}
+                            className="podium-nav-glass-stage"
+                            style={{ padding: glassPad, margin: -glassPad } as CSSProperties}
+                        >
+                            <canvas ref={canvasRef} className="podium-nav-glass-canvas" aria-hidden="true" />
+                            {pill}
                         </div>
-                    </div>
+                    ) : (
+                        pill
+                    )}
                 </div>
-            </header>
+
+                <div className="podium-nav-meta hidden lg:flex">
+                    <a className="podium-nav-meta-link is-phone" href={`tel:${phone.replace(/[^+\d]/g, "")}`}>
+                        {phone}
+                    </a>
+                    <Link href={ROUTES.CONTACTS} className="podium-nav-cta">
+                        {tCommon("bookCta")}
+                    </Link>
+                    <LanguageSwitcher />
+                </div>
+
+                <button
+                    type="button"
+                    onClick={() => setOpen(true)}
+                    aria-label={t("openMenu")}
+                    className="podium-nav-burger ml-auto flex lg:hidden"
+                >
+                    <Menu className="size-5" />
+                </button>
+            </div>
+
+            {!overlay && <div className="podium-nav-spacer" aria-hidden="true" />}
 
             <div
                 onClick={() => setOpen(false)}
@@ -157,6 +274,15 @@ export const Header = ({ overlay = false }: { overlay?: boolean }) => {
                     <p className="text-xs leading-relaxed text-foreground-faint">{pick(address, locale)}</p>
                 </div>
             </aside>
+
+            <LiquidGlassTweakPanel
+                open={panelOpen}
+                tweaks={glassTweaks}
+                onChange={onGlassChange}
+                onReset={onGlassReset}
+                onClose={() => setPanelOpen(false)}
+                onExport={onGlassExport}
+            />
         </>
     )
 };
